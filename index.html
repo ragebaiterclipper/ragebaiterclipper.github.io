@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ariel - Ragebaiter Clips: clips verticales para TikTok, Reels y Shorts a partir de tus streams y podcasts. 3 clips de muestra gratis.">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font: 14px system-ui, -apple-system, "Segoe UI", sans-serif; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Ragebaiter Clips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: una columna editorial; los titulares se "subtitulan" como los clips (palabra clave en caja amarilla). */
+:root {
+  --bg: #f3f3ef;
+  --surface: #ffffff;
+  --ink: #15161a;
+  --muted: #5b5d66;
+  --line: #dcdcd4;
+  --caption: #ffd60a;      /* el amarillo de los subtitulos */
+  --caption-ink: #15161a;
+  --font-display: "Montserrat", "Arial Black", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Consolas", monospace;
+  --step--1: 0.875rem; --step-0: 1rem; --step-1: 1.25rem; --step-2: 1.75rem; --step-3: clamp(2.2rem, 6vw, 3.6rem);
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111215; --surface: #1a1b20; --ink: #f1f1ec; --muted: #a2a4ad; --line: #2c2d34;
+    --caption: #ffd60a; --caption-ink: #15161a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111215; --surface: #1a1b20; --ink: #f1f1ec; --muted: #a2a4ad; --line: #2c2d34;
+  --caption: #ffd60a; --caption-ink: #15161a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 56px; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--caption); outline-offset: 3px; border-radius: 6px; }
+
+/* Barra superior */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.marca { font-family: var(--font-display); font-weight: 900; font-size: var(--step-1); letter-spacing: -0.01em; }
+.marca span { background: var(--caption); color: var(--caption-ink); padding: 0 6px; border-radius: 4px; }
+.idioma { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.idioma button { font: 700 var(--step--1) var(--font-body); background: transparent; color: var(--muted); border: 0; padding: 6px 14px; cursor: pointer; }
+.idioma button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Portada */
+.hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(24px, 5vw, 56px); align-items: center; padding-block: 24px 48px; }
+.hero > * { min-width: 0; }
+h1, h2 { font-family: var(--font-display); font-weight: 900; line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-3); }
+h2 { font-size: var(--step-2); }
+.hl { background: var(--caption); color: var(--caption-ink); padding: 0 0.18em; border-radius: 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.lead { font-size: var(--step-1); color: var(--muted); max-width: 34ch; margin: 20px 0 28px; }
+.oferta { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; max-width: 460px; }
+.oferta strong { font-family: var(--font-display); font-weight: 700; }
+.email { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.email code { font-family: var(--font-mono); font-size: var(--step-0); user-select: all; word-break: break-all; }
+.copiar { font: 700 var(--step--1) var(--font-body); background: var(--caption); color: var(--caption-ink); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.hero-clip { justify-self: center; width: min(100%, 300px); }
+
+/* Telefono con el clip */
+.tel { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 26px; overflow: hidden; background: #000; border: 6px solid var(--ink); }
+.tel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.specs { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 10px; text-align: center; }
+
+/* Secciones */
+section { padding-block: 40px; border-top: 1px solid var(--line); }
+.sub { color: var(--muted); max-width: 60ch; margin: 10px 0 28px; }
+.clips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 3vw, 28px); }
+.clip figcaption { margin-top: 12px; display: grid; gap: 2px; }
+.clip figcaption b { font-family: var(--font-display); font-weight: 700; font-size: var(--step-0); line-height: 1.3; }
+.clip figcaption span { font-size: var(--step--1); color: var(--muted); }
+figure { margin: 0; }
+.aviso { font-size: var(--step--1); color: var(--muted); margin-top: 20px; max-width: 70ch; }
+
+.incluye { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; padding: 0; margin: 0; list-style: none; }
+.incluye li { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; padding-block: 14px; border-bottom: 1px solid var(--line); min-width: 0; }
+.incluye li b { font-weight: 700; }
+.incluye li small { display: block; color: var(--muted); font-size: var(--step--1); }
+.incluye .dato { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+.pasos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 0; margin: 0; list-style: none; counter-reset: paso; }
+.pasos li { counter-increment: paso; min-width: 0; }
+.pasos li::before { content: counter(paso); display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--caption); color: var(--caption-ink); font: 900 var(--step-0) var(--font-display); margin-bottom: 10px; }
+.pasos b { display: block; font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
+.pasos p { margin: 0; color: var(--muted); }
+
+/* Calidad: texto + medidor a la izquierda, ficha tecnica a la derecha */
+.calidad { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 56px); align-items: start; }
+.calidad > * { min-width: 0; }
+.calidad .sub { margin-bottom: 24px; }
+.medidor { max-width: 420px; }
+.medidor-barra { position: relative; display: grid; grid-template-columns: 3fr 2fr 3fr; height: 44px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.zona { display: grid; place-items: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); background: var(--surface); }
+.zona.ok { background: var(--caption); color: var(--caption-ink); }
+.aguja { position: absolute; top: -6px; bottom: -6px; left: 50%; width: 3px; background: var(--ink); border-radius: 2px; }
+.medidor-escala { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: 8px; }
+.ficha { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 4px 20px; }
+.ficha div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; padding-block: 11px; border-bottom: 1px solid var(--line); }
+.ficha div:last-child { border-bottom: 0; }
+.ficha dt { color: var(--muted); font-size: var(--step--1); }
+.ficha dd { margin: 0; font-family: var(--font-mono); font-size: 0.85rem; min-width: 0; }
+
+.cierre { display: grid; gap: 16px; justify-items: start; }
+.cierre p { margin: 0; color: var(--muted); max-width: 60ch; }
+footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-clip { order: -1; width: min(70%, 260px); }
+  .clips { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; }
+  .incluye, .pasos, .calidad { grid-template-columns: 1fr; }
+  .ficha div { grid-template-columns: 1fr; gap: 2px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hl { transition: background-color .2s; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="marca">Ragebaiter <span>Clips</span></div>
+    <div class="idioma" role="group" aria-label="Idioma / Language">
+      <button type="button" id="btn-es" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" id="btn-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1 data-i18n-html="h1">Tú grabas. Yo hago que <span class="hl">te vean.</span></h1>
+      <p class="lead" data-i18n="lead">Soy Ariel. Edito clips verticales para TikTok, Reels y Shorts a partir de tus directos, podcasts y videos largos.</p>
+      <div class="oferta">
+        <strong data-i18n="oferta">Te hago 3 clips de muestra gratis de tu último video.</strong>
+        <span data-i18n="oferta2">Sin compromiso: si te gustan, hablamos.</span>
+        <div class="email">
+          <code id="mail">ragebaiterclipper@gmail.com</code>
+          <button type="button" class="copiar" id="copiar" data-i18n="copiar">Copiar email</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-clip">
+      <div class="tel">
+        <video src="clips/clip4.mp4" poster="clips/clip4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Ejemplo de clip editado"></video>
+      </div>
+      <p class="specs">9:16 · 1080×1920 · -14 LUFS</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="t-ejemplos">
+    <h2 id="t-ejemplos" data-i18n-html="h-ejemplos">Ejemplos de <span class="hl">mi edición</span></h2>
+    <p class="sub" data-i18n="sub-ejemplos">Clips completos, con sonido. Así quedan listos para subir.</p>
+    <div class="clips">
+      <figure class="clip">
+        <div class="tel"><video src="clips/clip7.mp4" poster="clips/clip7.jpg" controls playsinline preload="none"></video></div>
+        <figcaption><b>El peor error de conducir en el juego</b><span data-i18n="cat-gaming">Gaming · 0:20</span></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="tel"><video src="clips/clip6.mp4" poster="clips/clip6.jpg" controls playsinline preload="none"></video></div>
+        <figcaption><b>El cuerpo me está pidiendo basta</b><span data-i18n="cat-reto">Aventura / reto · 1:02</span></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="tel"><video src="clips/clip8.mp4" poster="clips/clip8.jpg" controls playsinline preload="none"></video></div>
+        <figcaption><b>El origen secreto del tango</b><span data-i18n="cat-cultura">Viajes / cultura · 0:24</span></figcaption>
+      </figure>
+    </div>
+    <p class="aviso" data-i18n="aviso">Ejemplos hechos con contenido público de The Wild Project (con Luisito Comunica), Carrero, Mateu Hernández y Nil Ojeda, en YouTube, para mostrar el estilo de edición. No son clientes ni trabajos encargados.</p>
+  </section>
+
+  <section aria-labelledby="t-incluye">
+    <h2 id="t-incluye" data-i18n-html="h-incluye">Qué lleva <span class="hl">cada clip</span></h2>
+    <p class="sub" data-i18n="sub-incluye">Lo que ves en los ejemplos, aplicado a tu contenido.</p>
+    <ul class="incluye">
+      <li><div><b data-i18n="f1">Subtítulos animados</b><small data-i18n="f1d">Palabra por palabra, con las palabras clave resaltadas.</small></div><span class="dato">word-by-word</span></li>
+      <li><div><b data-i18n="f2">Título gancho</b><small data-i18n="f2d">Una frase arriba que hace que se queden a mirar.</small></div><span class="dato">0–3 s</span></li>
+      <li><div><b data-i18n="f3">Zooms en el momento fuerte</b><small data-i18n="f3d">Siguen tu cara, con sonido de impacto.</small></div><span class="dato">auto-track</span></li>
+      <li><div><b data-i18n="f4">Formato para streams</b><small data-i18n="f4d">El juego arriba y tu cámara abajo, sin recortar.</small></div><span class="dato">split 9:16</span></li>
+      <li><div><b data-i18n="f5">Podcasts con varias personas</b><small data-i18n="f5d">El zoom va a quien está hablando.</small></div><span class="dato">speaker ID</span></li>
+      <li><div><b data-i18n="f6">Listo para publicar</b><small data-i18n="f6d">Audio nivelado, descripción y hashtags incluidos.</small></div><span class="dato">-14 LUFS</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="t-calidad" class="calidad">
+    <div class="calidad-txt">
+      <h2 id="t-calidad" data-i18n-html="h-calidad">Calidad de <span class="hl">verdad</span>, no solo bonito</h2>
+      <p class="sub" data-i18n="sub-calidad">Cada clip sale del video original en alta calidad y con el audio ajustado al nivel que usan las plataformas. Se ve nítido y suena parejo, en cualquier celular.</p>
+      <div class="medidor" role="img" aria-label="Medidor de volumen: muy bajo a -20 LUFS, mis clips a -14 LUFS, saturado a -8 LUFS">
+        <div class="medidor-barra">
+          <span class="zona baja" data-i18n="m-bajo">Muy bajo</span>
+          <span class="zona ok" data-i18n="m-ok">Mis clips</span>
+          <span class="zona alta" data-i18n="m-alto">Saturado</span>
+          <span class="aguja" aria-hidden="true"></span>
+        </div>
+        <div class="medidor-escala" aria-hidden="true"><span>-20</span><span>-14 LUFS</span><span>-8</span></div>
+      </div>
+    </div>
+    <dl class="ficha">
+      <div><dt data-i18n="c1">Resolución</dt><dd>1080 × 1920</dd></div>
+      <div><dt data-i18n="c2">Fluidez</dt><dd data-i18n="c2v">Hasta 60 fps</dd></div>
+      <div><dt data-i18n="c3">Calidad de imagen</dt><dd data-i18n="c3v">Hasta 12 Mbps, del original en 1080p</dd></div>
+      <div><dt data-i18n="c4">Volumen</dt><dd data-i18n="c4v">-14 LUFS, el nivel de YouTube y Spotify</dd></div>
+      <div><dt data-i18n="c5">Voz y efectos</dt><dd data-i18n="c5v">Efectos mezclados sin tapar la voz</dd></div>
+      <div><dt data-i18n="c6">Ritmo</dt><dd data-i18n="c6v">Sin silencios largos ni partes que se van del tema</dd></div>
+      <div><dt data-i18n="c7">Cortes</dt><dd data-i18n="c7v">Sin pérdida de calidad al cortar</dd></div>
+      <div><dt data-i18n="c8">Subtítulos</dt><dd data-i18n="c8v">Revisados palabra por palabra</dd></div>
+      <div><dt data-i18n="c9">Extra</dt><dd data-i18n="c9v">Portada de cada clip incluida</dd></div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="t-pasos">
+    <h2 id="t-pasos" data-i18n-html="h-pasos">Cómo <span class="hl">trabajamos</span></h2>
+    <p class="sub" data-i18n="sub-pasos">Tú sigues haciendo directos. Yo me encargo del resto.</p>
+    <ol class="pasos">
+      <li><b data-i18n="p1">Me pasas el link</b><p data-i18n="p1d">Tu VOD de Twitch o Kick, tu podcast o tu video de YouTube.</p></li>
+      <li><b data-i18n="p2">Elijo los mejores momentos</b><p data-i18n="p2d">Reviso todo el video y saco las partes con más gancho.</p></li>
+      <li><b data-i18n="p3">Recibes los clips</b><p data-i18n="p3d">Editados, en vertical y con su texto para publicar.</p></li>
+    </ol>
+  </section>
+
+  <section class="cierre" aria-labelledby="t-precio">
+    <h2 id="t-precio" data-i18n-html="h-precio">Empieza con <span class="hl">3 clips gratis</span></h2>
+    <p data-i18n="precio">El precio depende de cuántos clips por semana necesites. Escríbeme con el link de tu último video y te mando la muestra.</p>
+    <div class="email">
+      <code>ragebaiterclipper@gmail.com</code>
+      <button type="button" class="copiar" id="copiar2" data-i18n="copiar">Copiar email</button>
+    </div>
+    <footer data-i18n="footer">Ariel · Ragebaiter Clips</footer>
+  </section>
+</div>
+
+<script>
+(function () {
+  var textos = {
+    en: {
+      h1: 'You hit record. I make sure <span class="hl">you get seen.</span>',
+      lead: "I'm Ariel. I edit vertical clips for TikTok, Reels and Shorts from your streams, podcasts and long videos.",
+      oferta: "I'll make you 3 free sample clips from your latest video.",
+      oferta2: "No strings attached: if you like them, we talk.",
+      copiar: "Copy email",
+      "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
+      "sub-ejemplos": "Full clips, with sound. This is how they look when they're ready to post.",
+      "cat-gaming": "Gaming · 0:20", "cat-reto": "Adventure / challenge · 1:02", "cat-cultura": "Travel / culture · 0:24",
+      aviso: "Examples made from public YouTube content by The Wild Project (with Luisito Comunica), Carrero, Mateu Hernández and Nil Ojeda to show my editing style. They are not clients or commissioned jobs.",
+      "h-incluye": 'What <span class="hl">every clip</span> gets',
+      "sub-incluye": "Everything you see in the examples, applied to your content.",
+      f1: "Animated captions", f1d: "Word by word, with the key words highlighted.",
+      f2: "Hook title", f2d: "One line on top that makes people stay.",
+      f3: "Zooms on the big moment", f3d: "They follow your face, with an impact sound.",
+      f4: "Stream layout", f4d: "Gameplay on top and your camera below, nothing cropped out.",
+      f5: "Podcasts with several people", f5d: "The zoom goes to whoever is talking.",
+      f6: "Ready to post", f6d: "Leveled audio, caption and hashtags included.",
+      "h-calidad": '<span class="hl">Real</span> quality, not just pretty',
+      "sub-calidad": "Every clip is cut from the original video in high quality, with the audio set to the level the platforms use. Sharp to look at and even to listen to, on any phone.",
+      "m-bajo": "Too quiet", "m-ok": "My clips", "m-alto": "Distorted",
+      c1: "Resolution", c2: "Smoothness", c2v: "Up to 60 fps",
+      c3: "Image quality", c3v: "Up to 12 Mbps, from the 1080p original",
+      c4: "Loudness", c4v: "-14 LUFS, the YouTube and Spotify level",
+      c5: "Voice and effects", c5v: "Sound effects mixed without drowning the voice",
+      c6: "Pacing", c6v: "No long silences or off-topic tangents",
+      c7: "Cuts", c7v: "No quality loss when cutting",
+      c8: "Captions", c8v: "Checked word by word",
+      c9: "Extra", c9v: "A cover image for every clip",
+      "h-pasos": 'How <span class="hl">it works</span>',
+      "sub-pasos": "You keep streaming. I take care of the rest.",
+      p1: "Send me the link", p1d: "Your Twitch or Kick VOD, your podcast or your YouTube video.",
+      p2: "I pick the best moments", p2d: "I go through the whole video and cut the parts with the strongest hooks.",
+      p3: "You get the clips", p3d: "Edited, vertical and with their post caption.",
+      "h-precio": 'Start with <span class="hl">3 free clips</span>',
+      precio: "Pricing depends on how many clips per week you need. Email me the link to your latest video and I'll send you the samples.",
+      footer: "Ariel · Ragebaiter Clips",
+      copiado: "Copied!"
+    }
+  };
+  var es = {};
+  document.querySelectorAll("[data-i18n]").forEach(function (el) { es[el.dataset.i18n] = el.textContent; });
+  document.querySelectorAll("[data-i18n-html]").forEach(function (el) { es[el.dataset.i18nHtml] = el.innerHTML; });
+  es.copiado = "¡Copiado!";
+  textos.es = es;
+  var actual = "es";
+
+  function aplicar(lang) {
+    actual = lang;
+    var t = textos[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { if (t[el.dataset.i18n]) el.textContent = t[el.dataset.i18n]; });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) { if (t[el.dataset.i18nHtml]) el.innerHTML = t[el.dataset.i18nHtml]; });
+    document.querySelectorAll(".idioma button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+    try { localStorage.setItem("idioma", lang); } catch (e) {}
+  }
+
+  // Idioma: #en / #es en el link manda; si no, lo que eligio antes; si no, el idioma del navegador
+  var inicial = location.hash === "#en" ? "en" : location.hash === "#es" ? "es" : null;
+  if (!inicial) { try { inicial = localStorage.getItem("idioma"); } catch (e) {} }
+  if (!inicial) { inicial = (navigator.language || "es").toLowerCase().indexOf("es") === 0 ? "es" : "en"; }
+  if (inicial === "en") aplicar("en");
+
+  document.querySelectorAll(".idioma button").forEach(function (b) {
+    b.addEventListener("click", function () { aplicar(b.dataset.lang); });
+  });
+
+  function copiar(boton) {
+    var mail = "ragebaiterclipper@gmail.com";
+    var listo = function () {
+      var antes = boton.textContent;
+      boton.textContent = textos[actual].copiado;
+      setTimeout(function () { boton.textContent = antes; }, 1600);
+    };
+    var seleccionar = function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById("mail"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    try {
+      navigator.clipboard.writeText(mail).then(listo, seleccionar);
+    } catch (e) { seleccionar(); }
+  }
+  document.getElementById("copiar").addEventListener("click", function () { copiar(this); });
+  document.getElementById("copiar2").addEventListener("click", function () { copiar(this); });
+
+  // Solo un video suena a la vez
+  var videos = document.querySelectorAll(".clips video");
+  videos.forEach(function (v) {
+    v.addEventListener("play", function () { videos.forEach(function (o) { if (o !== v) o.pause(); }); });
+  });
+})();
+</script>
+</body>
+</html>
