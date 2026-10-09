@@ -152,7 +152,14 @@ figure { margin: 0; }
 .sobre p { max-width: 62ch; margin: 12px 0 0; }
 
 /* Paquetes */
-.paquetes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.paquetes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.paquete.destacado { border: 2px solid var(--caption); position: relative; }
+.sello { justify-self: start; font: 700 0.72rem var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase;
+         background: var(--caption); color: var(--caption-ink); padding: 3px 10px; border-radius: 6px; }
+.monto { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.monto b { font: 900 var(--step-2) var(--font-display); color: var(--ink); }
+.monto s { font-size: var(--step-0); }
+.nota { margin: 0; font-size: var(--step--1); color: var(--muted); }
 .paquete { display: grid; gap: 12px; align-content: start; background: var(--surface); border: 1px solid var(--line);
            border-radius: var(--radius); padding: 22px 20px; min-width: 0; }
 .paquete h3 { font: 900 var(--step-1) var(--font-display); margin: 0; }
@@ -175,7 +182,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
   .hero { grid-template-columns: 1fr; }
   .hero-clip { order: -1; width: min(70%, 260px); }
   .clips { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; }
-  .incluye, .pasos, .calidad, .antes-despues, .paquetes { grid-template-columns: 1fr; }
+  .incluye, .pasos, .calidad, .antes-despues { grid-template-columns: 1fr; }
   .sobre { grid-template-columns: 1fr; justify-items: start; }
   .sobre img { width: 110px; height: 110px; }
   .ficha div { grid-template-columns: 1fr; gap: 2px; }
@@ -201,7 +208,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       <p class="lead" data-i18n="lead">Soy Ariel. Edito clips verticales para TikTok, Reels y Shorts a partir de tus directos, podcasts y videos largos.</p>
       <div class="oferta">
         <strong data-i18n="oferta">Te hago 3 clips de muestra gratis de tu último video.</strong>
-        <span data-i18n="oferta2">Sin compromiso: si te gustan, hablamos.</span>
+        <span data-i18n="oferta2">Sin compromiso: si te gustan, lo conversamos :)</span>
         <div class="botones">
           <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
@@ -327,40 +334,66 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 
   <section aria-labelledby="t-paquetes">
     <h2 id="t-paquetes" data-i18n-html="h-paquetes">Paquetes <span class="hl">semanales</span></h2>
-    <p class="sub" data-i18n="sub-paquetes">Elige según cuánto contenido publicas. El precio depende del volumen: escríbeme y te envío una cotización sin compromiso.</p>
+    <p class="sub" data-i18n="sub-paquetes">Elige según la cantidad de contenido que publicas. Los precios están en bolivianos; si te encuentras en otro país, escríbeme y te envío una cotización.</p>
     <div class="paquetes">
       <div class="paquete">
         <h3 data-i18n="pq1">Inicial</h3>
+        <p class="monto"><b>Bs 220</b> <span data-i18n="por-semana">por semana</span></p>
+        <p class="nota" data-i18n="pq1-nota">Para conocer mi trabajo: disponible hasta por 1 mes.</p>
         <ul>
-          <li data-i18n="pq1a">Hasta 10 clips por semana</li>
-          <li data-i18n="pq1b">1 ronda de cambios</li>
-          <li data-i18n="pq-entrega">Entrega en 1 a 4 días</li>
+          <li data-i18n-html="pq1a"><b>7 clips</b> verticales por semana</li>
+          <li data-i18n="pq1b">Formato para TikTok, Reels y Shorts</li>
+          <li data-i18n="pq1c">Selección de los mejores momentos</li>
+          <li data-i18n="pq1d">Subtítulos animados palabra por palabra</li>
+          <li data-i18n="pq1e">Título gancho y zooms en los momentos clave</li>
+          <li data-i18n="pq1f">Exportación en la máxima calidad del video original</li>
+          <li data-i18n="pq1g">Entrega en un solo envío</li>
+          <li data-i18n="pq1h">1 ronda de modificaciones</li>
         </ul>
-        <span class="precio" data-i18n="pq-precio">Precio a consultar</span>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar precio</a>
+        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
+      </div>
+      <div class="paquete destacado">
+        <span class="sello" data-i18n="sello">Precio de lanzamiento</span>
+        <h3 data-i18n="pq2">Semanal</h3>
+        <p class="monto"><s>Bs 350</s> <b>Bs 250</b> <span data-i18n="por-semana">por semana</span></p>
+        <p class="nota" data-i18n="pq2-nota">Bs 250 durante las primeras 4 semanas; luego, Bs 350.</p>
+        <ul>
+          <li data-i18n-html="pq2a"><b>10 clips</b> verticales por semana</li>
+          <li data-i18n="pq2b">Todo lo del pack Inicial, y además:</li>
+          <li data-i18n="pq2c">Subtítulos con los colores de tu marca</li>
+          <li data-i18n="pq2d">Zooms que siguen al protagonista</li>
+          <li data-i18n="pq2e">Exportación en 1080p</li>
+          <li data-i18n="pq2f">Entrega en 2 tandas durante la semana</li>
+          <li data-i18n="pq2g">1 ronda de modificaciones</li>
+        </ul>
+        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
-        <h3 data-i18n="pq2">Creador</h3>
+        <h3 data-i18n="pq3">Creador</h3>
+        <p class="monto"><b data-i18n="a-consultar">Precio a consultar</b></p>
+        <p class="nota" data-i18n="pq3-nota">Para quienes publican todos los días.</p>
         <ul>
-          <li data-i18n="pq2a">Hasta 20 clips por semana</li>
-          <li data-i18n="pq2b">2 rondas de cambios</li>
-          <li data-i18n="pq-entrega">Entrega en 1 a 4 días</li>
+          <li data-i18n-html="pq3a"><b>15 clips</b> verticales por semana</li>
+          <li data-i18n="pq3b">Todo lo del pack Semanal, y además:</li>
+          <li data-i18n="pq3c">Estilo propio: tus colores y tu tipografía</li>
+          <li data-i18n="pq3d">2 rondas de modificaciones</li>
         </ul>
-        <span class="precio" data-i18n="pq-precio">Precio a consultar</span>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar precio</a>
+        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
-        <h3 data-i18n="pq3">Streamer</h3>
+        <h3 data-i18n="pq4">Streamer</h3>
+        <p class="monto"><b data-i18n="a-consultar">Precio a consultar</b></p>
+        <p class="nota" data-i18n="pq4-nota">Para quienes transmiten varias veces por semana.</p>
         <ul>
-          <li data-i18n="pq3a">30 clips o más por semana</li>
-          <li data-i18n="pq3b">Más rondas de cambios</li>
-          <li data-i18n="pq-entrega">Entrega en 1 a 4 días</li>
+          <li data-i18n-html="pq4a"><b>25 clips</b> verticales por semana</li>
+          <li data-i18n="pq4b">Todo lo del pack Creador, y además:</li>
+          <li data-i18n="pq4c">Formato de stream: juego arriba y cámara abajo</li>
+          <li data-i18n="pq4d">Entregas a lo largo de la semana</li>
         </ul>
-        <span class="precio" data-i18n="pq-precio">Precio a consultar</span>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar precio</a>
+        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
     </div>
-    <p class="extra" data-i18n="pq-extra">Servicio adicional: publicación de los clips en tus cuentas (community manager), por un costo adicional reducido.</p>
+    <p class="extra" data-i18n="pq-extra">Servicios adicionales: publicación de los clips en tus cuentas (community manager) y entregas urgentes, cada uno por un pequeño costo adicional.</p>
   </section>
 
   <section aria-labelledby="t-faq">
@@ -372,7 +405,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       <details><summary data-i18n="q2">¿Cuántos clips se obtienen de un stream?</summary>
         <p data-i18n="a2">Depende del contenido. Como referencia, de un stream de más de 2 horas obtengo al menos 5 clips. Selecciono únicamente los momentos con potencial real.</p></details>
       <details><summary data-i18n="q3">¿Puedo pedir cambios?</summary>
-        <p data-i18n="a3">Sí. Según el paquete, incluyo una o dos rondas de cambios; los paquetes más completos incluyen más rondas.</p></details>
+        <p data-i18n="a3">Sí. Los packs Inicial y Semanal incluyen una ronda de modificaciones, y los packs Creador y Streamer, dos.</p></details>
       <details><summary data-i18n="q4">¿Quién publica los clips?</summary>
         <p data-i18n="a4">Tú, en tus propias cuentas: te los entrego listos para subir, con su descripción y hashtags. Si prefieres que yo me encargue de publicarlos, ofrezco el servicio de community manager por un costo adicional reducido.</p></details>
       <details><summary data-i18n="q5">¿Qué necesito enviarte?</summary>
@@ -383,6 +416,16 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
         <p data-i18n="a7">Sí. Edito contenido en español y en inglés, con los subtítulos en el idioma del video.</p></details>
       <details><summary data-i18n="q8">¿Los clips de muestra tienen algún costo?</summary>
         <p data-i18n="a8">No. Los 3 clips de muestra son gratuitos y sin compromiso. Si te convencen, conversamos sobre el paquete que mejor se adapte a ti.</p></details>
+      <details><summary data-i18n="q9">¿Cómo se realiza el pago?</summary>
+        <p data-i18n="a9">En Bolivia, mediante pago por QR. Al contratar cualquier paquete se abona el 50% por adelantado y el 50% restante una vez que recibes los clips. Si te encuentras en otro país, escríbeme y coordinamos el medio de pago.</p></details>
+      <details><summary data-i18n="q10">¿Cómo recibo los clips?</summary>
+        <p data-i18n="a10">En una carpeta de Google Drive compartida contigo, desde donde puedes descargarlos cuando lo necesites.</p></details>
+      <details><summary data-i18n="q11">¿Puedo elegir los colores, la tipografía o el estilo de los subtítulos?</summary>
+        <p data-i18n="a11">Sí. Puedes indicarme los colores, la tipografía y el estilo de tu marca; y si te gusta la estética que utilizo habitualmente, la aplico tal cual. Como prefieras.</p></details>
+      <details><summary data-i18n="q12">¿Haces entregas urgentes?</summary>
+        <p data-i18n="a12">Sí, por un pequeño costo adicional. Indícamelo al hacer el pedido y priorizo tu entrega.</p></details>
+      <details><summary data-i18n="q13">¿Mi contenido queda privado?</summary>
+        <p data-i18n="a13">Sí, si así lo decides. Tu contenido te pertenece: si en algún momento quisiera mostrar alguno de tus clips en mi portafolio, te pediré permiso antes.</p></details>
     </div>
   </section>
 
@@ -414,7 +457,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       h1: 'You hit record. I make sure <span class="hl">you get seen.</span>',
       lead: "I'm Ariel. I edit vertical clips for TikTok, Reels and Shorts from your streams, podcasts and long videos.",
       oferta: "I'll make you 3 free sample clips from your latest video.",
-      oferta2: "No strings attached: if you like them, we talk.",
+      oferta2: "No strings attached: if you like them, we'll talk :)",
       copiar: "Copy email",
       "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
       "sub-ejemplos": "Full clips, with sound. This is how they look when they're ready to post.",
@@ -458,12 +501,23 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       sobre2: "You work directly with me, with no middlemen: you talk to the same person who edits your videos and stands behind every delivery.",
       sobre3: "Working from Bolivia lets me offer lower rates than most editors without cutting corners on quality. That's why I always start with 3 free sample clips: I'd rather you judge my work by the results.",
       "h-paquetes": 'Weekly <span class="hl">packages</span>',
-      "sub-paquetes": "Choose based on how much content you post. Pricing depends on volume: message me and I'll send you a quote, no strings attached.",
-      pq1: "Starter", pq1a: "Up to 10 clips per week", pq1b: "1 round of revisions",
-      pq2: "Creator", pq2a: "Up to 20 clips per week", pq2b: "2 rounds of revisions",
-      pq3: "Streamer", pq3a: "30+ clips per week", pq3b: "More rounds of revisions",
-      "pq-entrega": "Delivered in 1 to 4 days", "pq-precio": "Price on request", "pq-boton": "Ask for a quote",
-      "pq-extra": "Add-on service: posting the clips on your accounts (community management), for a small extra fee.",
+      "sub-paquetes": "Choose based on how much content you post. Prices are in Bolivianos (BOB); if you're outside Bolivia, message me and I'll send you a quote.",
+      "por-semana": "per week", sello: "Launch price", "a-consultar": "Price on request", "pq-boton": "Ask",
+      pq1: "Starter", "pq1-nota": "To get to know my work: available for up to 1 month.",
+      pq1a: "<b>7 clips</b> per week", pq1b: "Formatted for TikTok, Reels and Shorts", pq1c: "Selection of the best moments",
+      pq1d: "Word-by-word animated captions", pq1e: "Hook title and zooms on the key moments",
+      pq1f: "Exported at the original video's highest quality", pq1g: "Delivered in a single batch", pq1h: "1 round of revisions",
+      pq2: "Weekly", "pq2-nota": "Bs 250 for the first 4 weeks; Bs 350 afterwards.",
+      pq2a: "<b>10 clips</b> per week", pq2b: "Everything in Starter, plus:", pq2c: "Captions in your brand colors",
+      pq2d: "Zooms that follow the main speaker", pq2e: "1080p export", pq2f: "Delivered in 2 batches during the week",
+      pq2g: "1 round of revisions",
+      pq3: "Creator", "pq3-nota": "For creators who post every day.",
+      pq3a: "<b>15 clips</b> per week", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: your colors and font",
+      pq3d: "2 rounds of revisions",
+      pq4: "Streamer", "pq4-nota": "For streamers who go live several times a week.",
+      pq4a: "<b>25 clips</b> per week", pq4b: "Everything in Creator, plus:", pq4c: "Stream layout: gameplay on top, camera below",
+      pq4d: "Deliveries throughout the week",
+      "pq-extra": "Add-on services: posting the clips on your accounts (community management) and rush deliveries, each for a small extra fee.",
       "h-faq": 'Frequently asked <span class="hl">questions</span>',
       "sub-faq": "If you have any other question, message me and I'll answer personally.",
       q1: "How long does delivery take?",
@@ -471,7 +525,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       q2: "How many clips can you get from a stream?",
       a2: "It depends on the content. As a reference, a stream longer than 2 hours gives me at least 5 clips. I only pick moments with real potential.",
       q3: "Can I ask for changes?",
-      a3: "Yes. Depending on the package, I include one or two rounds of revisions; the bigger packages include more rounds.",
+      a3: "Yes. The Starter and Weekly packs include one round of revisions, and the Creator and Streamer packs include two.",
       q4: "Who posts the clips?",
       a4: "You do, on your own accounts: I deliver them ready to upload, with their caption and hashtags. If you'd rather I post them for you, I offer community management for a small extra fee.",
       q5: "What do I need to send you?",
@@ -482,6 +536,16 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       a7: "Yes. I edit content in Spanish and English, with captions in the language of the video.",
       q8: "Do the sample clips cost anything?",
       a8: "No. The 3 sample clips are free and with no commitment. If you like them, we'll talk about the package that suits you best.",
+      q9: "How do I pay?",
+      a9: "In Bolivia, by QR payment. For any package, 50% is paid upfront and the remaining 50% once you receive the clips. If you're in another country, message me and we'll agree on a payment method.",
+      q10: "How do I receive the clips?",
+      a10: "In a Google Drive folder shared with you, where you can download them whenever you need.",
+      q11: "Can I choose the colors, font or caption style?",
+      a11: "Yes. You can send me your brand's colors, font and style; and if you like the look I usually use, I'll apply it as is. Whatever you prefer.",
+      q12: "Do you do rush deliveries?",
+      a12: "Yes, for a small extra fee. Let me know when you place the order and I'll prioritize your delivery.",
+      q13: "Does my content stay private?",
+      a13: "Yes, if you want it to. Your content belongs to you: if I ever want to show one of your clips in my portfolio, I'll ask for your permission first.",
       footer: "Ariel · Ragebaiter Clips",
       copiado: "Copied!"
     }
