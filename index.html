@@ -178,6 +178,30 @@ figure { margin: 0; }
 .cierre p { margin: 0; color: var(--muted); max-width: 60ch; }
 footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 
+/* Luces: un resplandor suave del color del video que se senala, y brillo en botones y tarjetas */
+:root { --aura-alfa: 0.16; --brillo-alfa: 0.38; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --aura-alfa: 0.26; --brillo-alfa: 0.55; } }
+:root[data-theme="dark"] { --aura-alfa: 0.26; --brillo-alfa: 0.55; }
+.aura { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0;
+        background: radial-gradient(520px circle at var(--gx, 50%) var(--gy, 50%), rgb(var(--aura, 255 214 10) / var(--aura-alfa)), transparent 70%);
+        transition: opacity .8s ease; }
+.aura.encendida { opacity: 1; }
+.wrap { position: relative; z-index: 1; }
+.tel, .antes-despues .horizontal { transition: box-shadow .6s ease; }
+.con-luz:hover, .con-luz.sonando, .con-luz:focus-within { box-shadow: 0 0 46px -8px rgb(var(--c, 255 214 10) / var(--brillo-alfa)); }
+.btn, .copiar, .idioma button { transition: box-shadow .3s ease, transform .3s ease, filter .3s ease; }
+.btn:hover, .btn:focus-visible { box-shadow: 0 0 22px -4px rgb(255 214 10 / var(--brillo-alfa)); transform: translateY(-1px); }
+.btn-wa:hover, .btn-wa:focus-visible, .wa-flotante:hover { box-shadow: 0 0 26px -2px rgb(31 170 89 / 0.6); }
+.wa-flotante { transition: box-shadow .3s ease, transform .3s ease; }
+.wa-flotante:hover { transform: scale(1.06); }
+.copiar:hover, .copiar:focus-visible { box-shadow: 0 0 20px -2px rgb(255 214 10 / 0.7); filter: brightness(1.05); }
+.paquete { transition: box-shadow .5s ease, border-color .5s ease; }
+.paquete:hover { box-shadow: 0 0 34px -10px rgb(255 214 10 / var(--brillo-alfa)); border-color: rgb(255 214 10 / 0.6); }
+@media (prefers-reduced-motion: reduce) {
+  .aura, .tel, .antes-despues .horizontal, .btn, .copiar, .paquete, .wa-flotante { transition: none; }
+  .btn:hover, .wa-flotante:hover { transform: none; }
+}
+
 @media (max-width: 760px) {
   .hero { grid-template-columns: 1fr; }
   .hero-clip { order: -1; width: min(70%, 260px); }
@@ -193,6 +217,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 </style>
 </head>
 <body>
+<div class="aura" aria-hidden="true"></div>
 <div class="wrap">
   <header class="top">
     <div class="marca">Ragebaiter <span>Clips</span></div>
@@ -223,7 +248,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     </div>
     <div class="hero-clip">
       <div class="tel">
-        <video src="clips/clip4.mp4" poster="clips/clip4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Ejemplo de clip editado"></video>
+        <video data-luz="255 214 10" src="clips/clip4.mp4" poster="clips/clip4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Ejemplo de clip editado"></video>
       </div>
       <p class="specs">9:16 · 1080×1920 · -14 LUFS</p>
     </div>
@@ -234,15 +259,15 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     <p class="sub" data-i18n="sub-ejemplos">Clips completos, con sonido. Así quedan listos para subir.</p>
     <div class="clips">
       <figure class="clip">
-        <div class="tel"><video src="clips/clip7.mp4" poster="clips/clip7.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="255 214 10" src="clips/clip7.mp4" poster="clips/clip7.jpg" controls playsinline preload="none"></video></div>
         <figcaption><b>El peor error de conducir en el juego</b><span data-i18n="cat-gaming">Gaming · 0:20</span></figcaption>
       </figure>
       <figure class="clip">
-        <div class="tel"><video src="clips/clip6.mp4" poster="clips/clip6.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="70 230 140" src="clips/clip6.mp4" poster="clips/clip6.jpg" controls playsinline preload="none"></video></div>
         <figcaption><b>El cuerpo me está pidiendo basta</b><span data-i18n="cat-reto">Aventura / reto · 1:02</span></figcaption>
       </figure>
       <figure class="clip">
-        <div class="tel"><video src="clips/clip8.mp4" poster="clips/clip8.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="250 222 110" src="clips/clip8.mp4" poster="clips/clip8.jpg" controls playsinline preload="none"></video></div>
         <figcaption><b>El origen secreto del tango</b><span data-i18n="cat-cultura">Viajes / cultura · 0:24</span></figcaption>
       </figure>
     </div>
@@ -255,12 +280,12 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     <div class="antes-despues">
       <figure>
         <span class="etiqueta" data-i18n="antes">Antes</span>
-        <div class="horizontal"><video src="clips/antes_tango.mp4" poster="clips/antes_tango.jpg" controls playsinline preload="none"></video></div>
+        <div class="horizontal"><video data-luz="250 222 110" src="clips/antes_tango.mp4" poster="clips/antes_tango.jpg" controls playsinline preload="none"></video></div>
         <figcaption data-i18n="antes-pie">Video original: horizontal, tres personas en cuadro, sin subtítulos.</figcaption>
       </figure>
       <figure>
         <span class="etiqueta despues" data-i18n="despues">Después</span>
-        <div class="tel"><video src="clips/clip8.mp4" poster="clips/clip8.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="250 222 110" src="clips/clip8.mp4" poster="clips/clip8.jpg" controls playsinline preload="none"></video></div>
         <figcaption data-i18n="despues-pie">Mi clip: vertical, listo para publicar.</figcaption>
       </figure>
     </div>
@@ -606,6 +631,60 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
   }
   document.getElementById("copiar").addEventListener("click", function () { copiar(this); });
   document.getElementById("copiar2").addEventListener("click", function () { copiar(this); });
+
+  // Luces: el color principal de cada video (sacado de su portada) tine un resplandor suave en la pagina
+  var aura = document.querySelector(".aura");
+  function colorPrincipal(img) {
+    try {
+      var c = document.createElement("canvas"); c.width = c.height = 24;
+      var g = c.getContext("2d"); g.drawImage(img, 0, 0, 24, 24);
+      var d = g.getImageData(0, 0, 24, 24).data, bins = [];
+      for (var i = 0; i < d.length; i += 4) {
+        var R = d[i] / 255, G = d[i + 1] / 255, B = d[i + 2] / 255;
+        var mx = Math.max(R, G, B), mn = Math.min(R, G, B), s = mx ? (mx - mn) / mx : 0;
+        if (s < 0.3 || mx < 0.3) continue;            // solo colores vivos: fuera grises, blancos y negros
+        var h = mx === mn ? 0 : mx === R ? ((G - B) / (mx - mn) + 6) % 6 : mx === G ? (B - R) / (mx - mn) + 2 : (R - G) / (mx - mn) + 4;
+        var k = Math.floor(h * 2) % 12;               // 12 familias de color de 30 grados
+        var peso = s * mx;
+        if (h * 60 >= 5 && h * 60 <= 45 && s < 0.7) peso *= 0.25;   // tonos de piel: las caras no deciden el color
+        bins[k] = bins[k] || {w: 0, h: 0};
+        bins[k].w += peso; bins[k].h += h * 60 * peso;
+      }
+      var mejor = null;
+      bins.forEach(function (x) { if (x && (!mejor || x.w > mejor.w)) mejor = x; });
+      if (!mejor || mejor.w < 2) return null;
+      // El color que mas predomina, vivo y luminoso (saturacion 85%, luz 55%)
+      var hue = mejor.h / mejor.w, sat = 0.85, luz = 0.55;
+      var f = function (n) { var kk = (n + hue / 30) % 12; return luz - sat * Math.min(luz, 1 - luz) * Math.max(-1, Math.min(kk - 3, 9 - kk, 1)); };
+      return [f(0), f(8), f(4)].map(function (x) { return Math.round(x * 255); }).join(" ");
+    } catch (e) { return null; }
+  }
+  function encender(caja) {
+    var rect = caja.getBoundingClientRect();
+    aura.style.setProperty("--aura", caja.style.getPropertyValue("--c") || "255 214 10");
+    aura.style.setProperty("--gx", Math.round(rect.left + rect.width / 2) + "px");
+    aura.style.setProperty("--gy", Math.round(rect.top + rect.height / 2) + "px");
+    aura.classList.add("encendida");
+  }
+  function apagar() { aura.classList.remove("encendida"); }
+  document.querySelectorAll("video").forEach(function (v) {
+    var caja = v.closest(".tel, .horizontal");
+    if (!caja) return;
+    caja.classList.add("con-luz");
+    // El color de cada video = el del resaltado de su titulo (lo eligio el clipper segun la escena);
+    // la deteccion automatica queda para videos nuevos sin data-luz
+    if (v.dataset.luz) caja.style.setProperty("--c", v.dataset.luz);
+    else if (v.poster) {
+      var img = new Image();
+      img.onload = function () { var col = colorPrincipal(img); if (col) caja.style.setProperty("--c", col); };
+      img.src = v.poster;
+    }
+    caja.addEventListener("mouseenter", function () { encender(caja); });
+    caja.addEventListener("mouseleave", function () { if (!caja.classList.contains("sonando")) apagar(); });
+    v.addEventListener("play", function () { if (!v.muted) { caja.classList.add("sonando"); encender(caja); } });
+    v.addEventListener("pause", function () { caja.classList.remove("sonando"); apagar(); });
+    v.addEventListener("ended", function () { caja.classList.remove("sonando"); apagar(); });
+  });
 
   // Solo un video suena a la vez
   var videos = document.querySelectorAll("video[controls]");
