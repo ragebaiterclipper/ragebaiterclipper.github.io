@@ -117,7 +117,10 @@ figure { margin: 0; }
             background: rgb(0 0 0 / 0.55); color: #fff; display: grid; place-items: center; cursor: pointer; }
 .c-sonido svg { width: 20px; height: 20px; }
 .comparar input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.comparar:focus-within { outline: 3px solid var(--caption); outline-offset: 3px; }
+.comparar:focus-visible, .comparar:has(input:focus-visible) { outline: 3px solid var(--caption); outline-offset: 3px; }
+/* Esta seccion toma el azul del clip que muestra (en vez del amarillo): resaltado, etiqueta "Despues" y bordes */
+.azul { --caption: #38bdf8; --caption-ink: #0b1620; }
+.azul .cambios li { border-color: rgb(56 189 248 / 0.35); }
 .cambios { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 20px 0 0; list-style: none; }
 .cambios li { font-size: var(--step--1); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
 
@@ -298,7 +301,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     <p class="aviso" data-i18n="aviso">Ejemplos hechos con contenido público de The Wild Project (con Luisito Comunica), Carrero, Mateu Hernández, Cero y YSY A, en YouTube, para mostrar el estilo de edición. No son clientes ni trabajos encargados.</p>
   </section>
 
-  <section aria-labelledby="t-antes" class="revelar">
+  <section aria-labelledby="t-antes" class="revelar azul">
     <div class="antes-despues">
       <div class="tel comparar" id="comparar">
         <video class="c-antes" src="clips/antes_ysya.mp4" poster="clips/antes_ysya.jpg" muted playsinline preload="none" aria-hidden="true"></video>
