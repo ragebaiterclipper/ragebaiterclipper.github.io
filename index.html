@@ -170,11 +170,15 @@ figure { margin: 0; }
 .paquete .btn { justify-self: start; font-size: var(--step--1); padding: 8px 16px; }
 .sello { justify-self: start; font: 700 0.72rem var(--font-body); letter-spacing: 0.06em; text-transform: uppercase;
          background: var(--caption); color: var(--caption-ink); padding: 3px 10px; border-radius: 6px; }
-.monto { margin: 0; font-size: var(--step--1); color: var(--muted); }
-.monto b { font: 900 var(--step-2) var(--font-display); color: var(--ink); }
-.monto s { font-size: var(--step-0); }
 .nota { margin: 0; font-size: var(--step--1); color: var(--muted); }
 .extra { margin-top: 16px; font-size: var(--step--1); color: var(--muted); }
+.precios { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
+  padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.precios h3 { font: 900 var(--step-1) var(--font-display); margin: 0 0 4px; }
+.precios p { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.precios-contacto { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-correo { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn-correo:hover { border-color: var(--ink); }
 
 /* Preguntas frecuentes */
 .faq { display: grid; gap: 10px; max-width: 760px; }
@@ -329,12 +333,6 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       <div>
         <h2 id="t-antes" data-i18n-html="h-antes">Antes y <span class="hl">después</span></h2>
         <p class="sub" data-i18n="sub-antes">El mismo momento: el video original tal como se grabó y el clip que entrego. Desliza la barra para comparar.</p>
-        <ul class="cambios">
-          <li data-i18n="cambio1">Encuadre en quien habla</li>
-          <li data-i18n="cambio2">Subtítulos palabra por palabra</li>
-          <li data-i18n="cambio3">Título gancho</li>
-          <li data-i18n="cambio4">Audio nivelado</li>
-        </ul>
       </div>
     </div>
   </section>
@@ -362,7 +360,6 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       <div><dt data-i18n="c2">Fluidez</dt><dd data-i18n="c2v">Hasta 60 fps</dd></div>
       <div><dt data-i18n="c4">Volumen</dt><dd data-i18n="c4v">Parejo, al nivel de TikTok y YouTube</dd></div>
       <div><dt data-i18n="c6">Ritmo</dt><dd data-i18n="c6v">Sin silencios largos ni partes que se van del tema</dd></div>
-      <div><dt data-i18n="c8">Subtítulos</dt><dd data-i18n="c8v">Revisados palabra por palabra</dd></div>
     </dl>
   </section>
 
@@ -372,42 +369,36 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     <ol class="pasos">
       <li><b data-i18n="p1">Me pasas el link</b><p data-i18n="p1d">Tu VOD de Twitch o Kick, tu podcast o tu video de YouTube.</p></li>
       <li><b data-i18n="p2">Elijo los mejores momentos</b><p data-i18n="p2d">Reviso todo el video y saco las partes con más gancho.</p></li>
-      <li><b data-i18n="p3">Recibes los clips</b><p data-i18n="p3d">Editados, en vertical y con su texto para publicar, en 1 a 4 días.</p></li>
+      <li><b data-i18n="p3">Recibes los clips</b><p data-i18n="p3d">Editados, en vertical y con su texto para publicar.</p></li>
     </ol>
   </section>
 
   <section aria-labelledby="t-paquetes" class="revelar">
     <h2 id="t-paquetes" data-i18n-html="h-paquetes">Paquetes <span class="hl">semanales</span></h2>
-    <p class="sub" data-i18n="sub-paquetes">Elige según cuánto publicas. Precios en bolivianos; si estás en otro país, escríbeme y te paso una cotización.</p>
+    <p class="sub" data-i18n="sub-paquetes">Elige según cuánto publicas.</p>
     <div class="paquetes">
       <div class="paquete">
         <h3 data-i18n="pq1">Inicial</h3>
-        <p class="monto"><b>Bs 220</b> <span data-i18n="por-semana">por semana</span></p>
         <p class="nota" data-i18n="pq1-nota">Para conocer mi trabajo: hasta 2 semanas.</p>
         <ul>
           <li data-i18n-html="pq1a"><b>7 clips</b> por semana</li>
-          <li data-i18n="pq1b">Todo lo que lleva cada clip</li>
           <li data-i18n="pq1c">Entrega en un solo envío</li>
           <li data-i18n="pq1d">1 ronda de cambios</li>
         </ul>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete destacado">
-        <span class="sello" data-i18n="sello">Precio de lanzamiento</span>
+        <span class="sello" data-i18n="sello">Recomendado</span>
         <h3 data-i18n="pq2">Semanal</h3>
-        <p class="monto"><s>Bs 350</s> <b>Bs 250</b> <span data-i18n="por-semana">por semana</span></p>
-        <p class="nota" data-i18n="pq2-nota">Bs 250 las primeras 4 semanas; luego, Bs 350.</p>
+        <p class="nota" data-i18n="pq2-nota">El equilibrio entre cantidad y constancia.</p>
         <ul>
           <li data-i18n-html="pq2a"><b>10 clips</b> por semana</li>
           <li data-i18n="pq2b">Todo lo del Inicial, y además:</li>
           <li data-i18n="pq2c">Subtítulos con los colores de tu marca</li>
           <li data-i18n="pq2d">Entrega en 2 tandas por semana</li>
         </ul>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
         <h3 data-i18n="pq3">Creador</h3>
-        <p class="monto"><b data-i18n="a-consultar">A consultar</b></p>
         <p class="nota" data-i18n="pq3-nota">Para quienes publican todos los días.</p>
         <ul>
           <li data-i18n-html="pq3a"><b>15 clips</b> por semana</li>
@@ -415,21 +406,31 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
           <li data-i18n="pq3c">Tu propio estilo: colores y tipografía</li>
           <li data-i18n="pq3d">2 rondas de cambios</li>
         </ul>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
         <h3 data-i18n="pq4">Streamer</h3>
-        <p class="monto"><b data-i18n="a-consultar">A consultar</b></p>
         <p class="nota" data-i18n="pq4-nota">Para quienes transmiten varias veces por semana.</p>
         <ul>
           <li data-i18n-html="pq4a"><b>25 clips</b> por semana</li>
           <li data-i18n="pq4b">Todo lo del Creador, y además:</li>
           <li data-i18n="pq4c">Entregas a lo largo de la semana</li>
         </ul>
-        <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
     </div>
-    <p class="extra" data-i18n="pq-extra">Aparte, por un pequeño costo: publicación de los clips en tus cuentas y entregas urgentes.</p>
+    <p class="extra" data-i18n="pq-extra">Aparte: publicación de los clips en tus cuentas y entregas urgentes.</p>
+    <div class="precios">
+      <div>
+        <h3 data-i18n="pr-titulo">Consulta precios aquí</h3>
+        <p data-i18n="pr-texto">Te paso la cotización según tu país y cuánto publicas.</p>
+      </div>
+      <div class="precios-contacto">
+        <a class="btn btn-wa wa-precio" href="https://wa.me/59175027789" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a class="btn btn-correo" href="mailto:ragebaiterclipper@gmail.com" data-i18n="pr-correo">Correo</a>
+      </div>
+    </div>
   </section>
 
   <section aria-labelledby="t-sobre" class="sobre revelar">
@@ -437,7 +438,7 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     <div>
       <h2 id="t-sobre" data-i18n-html="h-sobre">Sobre <span class="hl">mí</span></h2>
       <p data-i18n="sobre1">Soy Ariel, editor de clips verticales desde Bolivia. Trabajas directamente conmigo, sin intermediarios: la misma persona que edita tus videos es la que te responde.</p>
-      <p data-i18n="sobre2">Trabajar desde Bolivia me permite cobrar menos que la mayoría de editores sin bajar la calidad. Por eso empiezo con 3 clips de muestra gratis: prefiero que me juzgues por los resultados.</p>
+      <p data-i18n="sobre2">Trabajar desde Bolivia me permite cobrar menos que la mayoría de editores sin bajar la calidad: prefiero que me juzgues por los resultados.</p>
     </div>
   </section>
 
@@ -452,7 +453,7 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       <details><summary data-i18n="q5">¿Qué necesito enviarte?</summary>
         <p data-i18n="a5">Solo los links de los videos o streams que quieres convertir en clips. Del resto me encargo yo.</p></details>
       <details><summary data-i18n="q6">¿Cómo y en qué formato recibo los clips?</summary>
-        <p data-i18n="a6">En video vertical MP4 de 1080 × 1920, listo para TikTok, Reels y Shorts, con su portada, descripción y hashtags. Te los dejo en una carpeta de Google Drive compartida contigo.</p></details>
+        <p data-i18n="a6">Listos para subir, en una carpeta de Google Drive compartida contigo.</p></details>
       <details><summary data-i18n="q4">¿Quién publica los clips?</summary>
         <p data-i18n="a4">Tú, en tus propias cuentas: te los entrego listos para subir. Si prefieres que los publique yo, lo hago por un pequeño costo adicional.</p></details>
       <details><summary data-i18n="q7">¿Trabajas con contenido en inglés?</summary>
@@ -503,7 +504,6 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       "h-antes": 'Before and <span class="hl">after</span>',
       "sub-antes": "The same moment: the original video as it was recorded and the clip I deliver. Drag the bar to compare.",
       antes: "Before", despues: "After",
-      cambio1: "Framed on whoever is talking", cambio2: "Word-by-word captions", cambio3: "Hook title", cambio4: "Leveled audio",
       "h-incluye": 'What <span class="hl">every clip</span> gets',
       "sub-incluye": "Everything you see in the examples, applied to your content.",
       f1: "Animated captions", f1d: "Word by word, with the key words highlighted.",
@@ -515,27 +515,28 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       "h-calidad": '<span class="hl">Real</span> quality, not just pretty',
       "sub-calidad": "Every clip is cut from the original video in high quality, with the audio at the level the platforms use. Sharp to look at and even to listen to, on any phone.",
       c1: "Resolution", c2: "Smoothness", c2v: "Up to 60 fps", c4: "Loudness", c4v: "Even, at TikTok and YouTube level",
-      c6: "Pacing", c6v: "No long silences or off-topic tangents", c8: "Captions", c8v: "Checked word by word",
+      c6: "Pacing", c6v: "No long silences or off-topic tangents",
       "h-pasos": 'How <span class="hl">it works</span>',
       "sub-pasos": "You keep creating. I take care of the rest.",
       p1: "Send me the link", p1d: "Your Twitch or Kick VOD, your podcast or your YouTube video.",
       p2: "I pick the best moments", p2d: "I go through the whole video and cut the parts with the strongest hooks.",
-      p3: "You get the clips", p3d: "Edited, vertical and with their post caption, in 1 to 4 days.",
+      p3: "You get the clips", p3d: "Edited, vertical and with their post caption.",
       "h-paquetes": 'Weekly <span class="hl">packages</span>',
-      "sub-paquetes": "Choose based on how much you post. Prices in Bolivianos (BOB); if you're outside Bolivia, message me and I'll send you a quote.",
-      "por-semana": "per week", sello: "Launch price", "a-consultar": "On request", "pq-boton": "Ask",
+      "sub-paquetes": "Choose based on how much you post.",
+      sello: "Recommended",
       pq1: "Starter", "pq1-nota": "To get to know my work: up to 2 weeks.",
-      pq1a: "<b>7 clips</b> per week", pq1b: "Everything every clip gets", pq1c: "Delivered in a single batch", pq1d: "1 round of revisions",
-      pq2: "Weekly", "pq2-nota": "Bs 250 for the first 4 weeks; Bs 350 afterwards.",
+      pq1a: "<b>7 clips</b> per week", pq1c: "Delivered in a single batch", pq1d: "1 round of revisions",
+      pq2: "Weekly", "pq2-nota": "The balance between volume and consistency.",
       pq2a: "<b>10 clips</b> per week", pq2b: "Everything in Starter, plus:", pq2c: "Captions in your brand colors", pq2d: "Delivered in 2 batches a week",
       pq3: "Creator", "pq3-nota": "For creators who post every day.",
       pq3a: "<b>15 clips</b> per week", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: colors and font", pq3d: "2 rounds of revisions",
       pq4: "Streamer", "pq4-nota": "For streamers who go live several times a week.",
       pq4a: "<b>25 clips</b> per week", pq4b: "Everything in Creator, plus:", pq4c: "Deliveries throughout the week",
-      "pq-extra": "Add-ons, for a small fee: posting the clips on your accounts and rush deliveries.",
+      "pq-extra": "Add-ons: posting the clips on your accounts and rush deliveries.",
+      "pr-titulo": "Ask for prices here", "pr-texto": "I'll send you a quote based on your country and how much you post.", "pr-correo": "Email",
       "h-sobre": 'About <span class="hl">me</span>',
       sobre1: "I'm Ariel, a vertical clip editor based in Bolivia. You work directly with me, no middlemen: the person who edits your videos is the one who answers you.",
-      sobre2: "Working from Bolivia lets me charge less than most editors without lowering the quality. That's why I start with 3 free sample clips: I'd rather you judge me by the results.",
+      sobre2: "Working from Bolivia lets me charge less than most editors without lowering the quality: I'd rather you judge me by the results.",
       "h-faq": 'Frequently asked <span class="hl">questions</span>',
       "sub-faq": "If you have any other question, message me and I'll answer personally.",
       q1: "How long does delivery take?",
@@ -545,7 +546,7 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       q5: "What do I need to send you?",
       a5: "Just the links to the videos or streams you want turned into clips. I take care of the rest.",
       q6: "How and in what format do I get the clips?",
-      a6: "Vertical 1080 × 1920 MP4 video, ready for TikTok, Reels and Shorts, with its cover image, caption and hashtags. I leave them in a Google Drive folder shared with you.",
+      a6: "Ready to upload, in a Google Drive folder shared with you.",
       q4: "Who posts the clips?",
       a4: "You do, on your own accounts: I deliver them ready to upload. If you'd rather I post them, I can do it for a small extra fee.",
       q7: "Do you work with English content?",
@@ -589,9 +590,16 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     es: "Hola Ariel, vi tu página y quiero mis 3 clips de muestra gratis.",
     en: "Hi Ariel, I saw your page and I'd like my 3 free sample clips."
   };
+  var MENSAJE_PRECIO = {
+    es: "Hola Ariel, vi tu página y quiero consultar los precios de los paquetes.",
+    en: "Hi Ariel, I saw your page and I'd like to ask about your package prices."
+  };
   function actualizarWhatsApp(lang) {
     var url = "https://wa.me/59175027789?text=" + encodeURIComponent(MENSAJE_WA[lang] || MENSAJE_WA.es);
     document.querySelectorAll("a.wa").forEach(function (a) { a.href = url; });
+    document.querySelectorAll("a.wa-precio").forEach(function (a) {
+      a.href = "https://wa.me/59175027789?text=" + encodeURIComponent(MENSAJE_PRECIO[lang] || MENSAJE_PRECIO.es);
+    });
   }
 
   function copiar(boton) {
