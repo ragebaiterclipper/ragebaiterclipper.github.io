@@ -206,7 +206,8 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 
 /* "3 clips gratis": la oferta se destaca (caja amarilla + tarjeta con un brillo suave del mismo color) */
 .oferta { border-color: rgb(255 214 10 / 0.55); box-shadow: 0 12px 40px -20px rgb(255 214 10 / 0.7); }
-.gratis { position: relative; display: inline-block; overflow: hidden; vertical-align: baseline; white-space: nowrap;
+/* clip-path (no overflow: hidden) recorta el destello sin mover la caja: con overflow la caja se subia sobre la linea */
+.gratis { position: relative; display: inline-block; clip-path: inset(0 round 0.25em); white-space: nowrap;
           background: var(--caption); color: var(--caption-ink); padding: 0 0.3em; border-radius: 0.25em; }
 h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
 
