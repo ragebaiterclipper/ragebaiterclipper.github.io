@@ -204,6 +204,12 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 .paquete { transition: box-shadow .5s ease, border-color .5s ease; }
 .paquete:hover { box-shadow: 0 0 34px -10px rgb(255 214 10 / var(--brillo-alfa)); border-color: rgb(255 214 10 / 0.6); }
 
+/* "3 clips gratis": la oferta se destaca (caja amarilla + tarjeta con un brillo suave del mismo color) */
+.oferta { border-color: rgb(255 214 10 / 0.55); box-shadow: 0 12px 40px -20px rgb(255 214 10 / 0.7); }
+.gratis { position: relative; display: inline-block; overflow: hidden; vertical-align: baseline; white-space: nowrap;
+          background: var(--caption); color: var(--caption-ink); padding: 0 0.3em; border-radius: 0.25em; }
+h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
+
 /* ---- Animaciones (solo con .anim: el visitante no pidio "reducir movimiento") ---- */
 /* 1. Las secciones aparecen suaves al llegar a ellas */
 .anim .revelar { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--suave), transform .8s var(--suave); }
@@ -225,6 +231,11 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
   background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.95) 50%, transparent 65%) -150% 0 / 250% 100% no-repeat;
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
 .anim .destacado.visto::after { animation: brillo 1.6s ease .5s 1 both; }
+/* 5. "3 clips gratis": un destello de luz lo cruza cada 7 s (rapido y suave: se nota sin molestar) */
+.anim .gratis::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.8) 50%, transparent 70%);
+  transform: translateX(-130%); animation: destello 7s ease-in-out 1.4s infinite; }
+@keyframes destello { 0% { transform: translateX(-130%); } 13% { transform: translateX(130%); } 100% { transform: translateX(130%); } }
 @keyframes brillo { from { background-position: -150% 0; } to { background-position: 250% 0; } }
 
 @media (max-width: 760px) {
@@ -259,7 +270,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       <h1 data-i18n-html="h1">Tú grabas. Yo hago que <span class="hl">te vean.</span></h1>
       <p class="lead" data-i18n="lead">Soy Ariel. Edito clips verticales para TikTok, Reels y Shorts a partir de tus directos, podcasts y videos largos.</p>
       <div class="oferta">
-        <strong data-i18n="oferta">Te hago 3 clips de muestra gratis de tu último video.</strong>
+        <strong data-i18n-html="oferta">Te hago <span class="gratis">3 clips gratis</span> de muestra con tu último video.</strong>
         <span data-i18n="oferta2">Sin compromiso: si te gustan, lo conversamos :)</span>
         <div class="botones">
           <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
@@ -453,7 +464,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
   </section>
 
   <section class="cierre revelar" aria-labelledby="t-precio">
-    <h2 id="t-precio" data-i18n-html="h-precio">Empieza con <span class="hl">3 clips gratis</span></h2>
+    <h2 id="t-precio" data-i18n-html="h-precio">Empieza con <span class="hl gratis">3 clips gratis</span></h2>
     <p data-i18n="precio">Mándame el link de tu último video por WhatsApp o por correo y te envío la muestra.</p>
     <div class="botones">
       <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
@@ -481,7 +492,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     en: {
       h1: 'You hit record. I make sure <span class="hl">you get seen.</span>',
       lead: "I'm Ariel. I edit vertical clips for TikTok, Reels and Shorts from your streams, podcasts and long videos.",
-      oferta: "I'll make you 3 free sample clips from your latest video.",
+      oferta: "I'll make you <span class=\"gratis\">3 free clips</span> as samples from your latest video.",
       oferta2: "No strings attached: if you like them, we'll talk :)",
       "o-correo": "or by email:", copiar: "Copy", copiado: "Copied!",
       "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
@@ -542,7 +553,7 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       a9: "In Bolivia, by QR: 50% upfront and 50% when you receive the clips. If you're in another country, message me and we'll agree on a payment method.",
       q13: "Does my content stay private?",
       a13: "Yes. Your content belongs to you: if I ever want to show one of your clips in my portfolio, I'll ask for your permission first.",
-      "h-precio": 'Start with <span class="hl">3 free clips</span>',
+      "h-precio": 'Start with <span class="hl gratis">3 free clips</span>',
       precio: "Send me the link to your latest video on WhatsApp or by email and I'll send you the samples.",
       "wa-boton": "Message me on WhatsApp",
       footer: "Ariel · Ragebaiter Clips",
