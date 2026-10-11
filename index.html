@@ -13,18 +13,16 @@
 <meta property="og:description" content="Clips verticales para TikTok, Reels y Shorts a partir de tus streams y podcasts. 3 clips de muestra gratis.">
 <meta property="og:image" content="https://ragebaiterclipper.github.io/icono-512.png">
 <meta name="twitter:card" content="summary">
-<style>
-:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-body { margin: 0; font: 14px system-ui, -apple-system, "Segoe UI", sans-serif; }
-img { max-width: 100%; }
-[hidden] { display: none !important; }
-</style>
 <title>Ragebaiter Clips</title>
+<script>
+  // Animaciones solo si el visitante no las desactivo en su dispositivo (y con JavaScript: sin JS todo se ve quieto)
+  if (!window.matchMedia || !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("anim");
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Manrope:wght@400;500;700&display=swap">
 <style>
-/* Layout: una columna editorial; los titulares se "subtitulan" como los clips (palabra clave en caja amarilla). */
+/* Una columna editorial; los titulares se "subtitulan" como los clips (palabra clave en caja amarilla). */
 :root {
   --bg: #f3f3ef;
   --surface: #ffffff;
@@ -33,25 +31,31 @@ img { max-width: 100%; }
   --line: #dcdcd4;
   --caption: #ffd60a;      /* el amarillo de los subtitulos */
   --caption-ink: #15161a;
+  --wa: #1faa59; --wa-ink: #ffffff;
   --font-display: "Montserrat", "Arial Black", system-ui, sans-serif;
   --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Consolas", monospace;
   --step--1: 0.875rem; --step-0: 1rem; --step-1: 1.25rem; --step-2: 1.75rem; --step-3: clamp(2.2rem, 6vw, 3.6rem);
   --radius: 14px;
+  --suave: cubic-bezier(.16, 1, .3, 1);
+  --aura-alfa: 0.16; --brillo-alfa: 0.38;
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #111215; --surface: #1a1b20; --ink: #f1f1ec; --muted: #a2a4ad; --line: #2c2d34;
-    --caption: #ffd60a; --caption-ink: #15161a; color-scheme: dark;
+    --aura-alfa: 0.26; --brillo-alfa: 0.55; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111215; --surface: #1a1b20; --ink: #f1f1ec; --muted: #a2a4ad; --line: #2c2d34;
-  --caption: #ffd60a; --caption-ink: #15161a; color-scheme: dark;
+  --aura-alfa: 0.26; --brillo-alfa: 0.55; color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6; }
-.wrap { max-width: 1040px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 56px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+       padding-bottom: env(safe-area-inset-bottom, 0px); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.wrap { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 56px; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--caption); outline-offset: 3px; border-radius: 6px; }
 
@@ -71,33 +75,70 @@ h1 { font-size: var(--step-3); }
 h2 { font-size: var(--step-2); }
 .hl { background: var(--caption); color: var(--caption-ink); padding: 0 0.18em; border-radius: 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .lead { font-size: var(--step-1); color: var(--muted); max-width: 34ch; margin: 20px 0 28px; }
-.oferta { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; max-width: 460px; }
+.oferta { display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; max-width: 460px; }
 .oferta strong { font-family: var(--font-display); font-weight: 700; }
-.email { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.email code { font-family: var(--font-mono); font-size: var(--step-0); user-select: all; word-break: break-all; }
-.copiar { font: 700 var(--step--1) var(--font-body); background: var(--caption); color: var(--caption-ink); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.oferta > span { color: var(--muted); }
+.email { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: var(--step--1); color: var(--muted); }
+.email code { font: 500 var(--step-0) var(--font-body); color: var(--ink); user-select: all; word-break: break-all; }
+.copiar { font: 700 var(--step--1) var(--font-body); background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
 .hero-clip { justify-self: center; width: min(100%, 300px); }
 
 /* Telefono con el clip */
 .tel { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 26px; overflow: hidden; background: #000; border: 6px solid var(--ink); }
 .tel video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.specs { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 10px; text-align: center; }
 
 /* Secciones */
-section { padding-block: 40px; border-top: 1px solid var(--line); }
+section { padding-block: 44px; border-top: 1px solid var(--line); }
 .sub { color: var(--muted); max-width: 60ch; margin: 10px 0 28px; }
 .clips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 3vw, 28px); }
 .clip figcaption { margin-top: 12px; display: grid; gap: 2px; }
 .clip figcaption b { font-family: var(--font-display); font-weight: 700; font-size: var(--step-0); line-height: 1.3; }
 .clip figcaption span { font-size: var(--step--1); color: var(--muted); }
 figure { margin: 0; }
-.aviso { font-size: var(--step--1); color: var(--muted); margin-top: 20px; max-width: 70ch; }
+.aviso { font-size: 0.8rem; color: var(--muted); margin-top: 20px; max-width: 70ch; }
+
+/* Antes y despues: un solo telefono, la barra separa el original (izq.) del clip (der.) */
+.antes-despues { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 56px); align-items: center; }
+.antes-despues > * { min-width: 0; }
+.comparar { width: min(78vw, 300px); touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; --corte: 50%; }
+.comparar video { position: absolute; inset: 0; }
+.comparar .c-antes { object-fit: contain; background: #000; }
+.comparar .c-despues { clip-path: inset(0 0 0 var(--corte)); }
+.c-tag { position: absolute; top: 12px; z-index: 2; font: 700 0.72rem var(--font-body); letter-spacing: 0.08em; text-transform: uppercase;
+         padding: 4px 10px; border-radius: 6px; pointer-events: none; }
+.c-tag-antes { left: 12px; background: rgb(0 0 0 / 0.55); color: #fff; }
+.c-tag-despues { right: 12px; background: var(--caption); color: var(--caption-ink); }
+.c-linea { position: absolute; top: 0; bottom: 0; left: var(--corte); width: 2px; margin-left: -1px; background: #fff; z-index: 2;
+           box-shadow: 0 0 10px rgb(0 0 0 / 0.4); pointer-events: none; }
+.c-linea span { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%;
+                background: #fff; box-shadow: 0 4px 14px rgb(0 0 0 / 0.35); display: grid; place-items: center; }
+.c-linea span::before { content: "‹ ›"; font: 900 15px var(--font-body); color: #15161a; letter-spacing: 2px; }
+.c-sonido { position: absolute; right: 12px; bottom: 12px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 0;
+            background: rgb(0 0 0 / 0.55); color: #fff; display: grid; place-items: center; cursor: pointer; }
+.c-sonido svg { width: 20px; height: 20px; }
+.comparar input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.comparar:focus-within { outline: 3px solid var(--caption); outline-offset: 3px; }
+.cambios { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 20px 0 0; list-style: none; }
+.cambios li { font-size: var(--step--1); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
 
 .incluye { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; padding: 0; margin: 0; list-style: none; }
-.incluye li { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; padding-block: 14px; border-bottom: 1px solid var(--line); min-width: 0; }
+.incluye li { padding-block: 14px; border-bottom: 1px solid var(--line); min-width: 0; }
 .incluye li b { font-weight: 700; }
 .incluye li small { display: block; color: var(--muted); font-size: var(--step--1); }
-.incluye .dato { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+/* Calidad: texto a la izquierda, ficha a la derecha */
+.calidad { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 56px); align-items: start; }
+.calidad > * { min-width: 0; }
+.ficha { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 4px 20px; }
+.ficha div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 12px; padding-block: 11px; border-bottom: 1px solid var(--line); }
+.ficha div:last-child { border-bottom: 0; }
+.ficha dt { color: var(--muted); font-size: var(--step--1); }
+.ficha dd { margin: 0; font-size: 0.95rem; font-weight: 500; min-width: 0; }
+
+/* Sobre mi */
+.sobre { display: grid; grid-template-columns: 140px 1fr; gap: clamp(20px, 4vw, 40px); align-items: center; }
+.sobre img { width: 140px; height: 140px; border-radius: 50%; }
+.sobre p { max-width: 62ch; margin: 12px 0 0; }
 
 .pasos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 0; margin: 0; list-style: none; counter-reset: paso; }
 .pasos li { counter-increment: paso; min-width: 0; }
@@ -105,24 +146,7 @@ figure { margin: 0; }
 .pasos b { display: block; font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
 .pasos p { margin: 0; color: var(--muted); }
 
-/* Calidad: texto + medidor a la izquierda, ficha tecnica a la derecha */
-.calidad { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 56px); align-items: start; }
-.calidad > * { min-width: 0; }
-.calidad .sub { margin-bottom: 24px; }
-.medidor { max-width: 420px; }
-.medidor-barra { position: relative; display: grid; grid-template-columns: 3fr 2fr 3fr; height: 44px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
-.zona { display: grid; place-items: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); background: var(--surface); }
-.zona.ok { background: var(--caption); color: var(--caption-ink); }
-.aguja { position: absolute; top: -6px; bottom: -6px; left: 50%; width: 3px; background: var(--ink); border-radius: 2px; }
-.medidor-escala { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: 8px; }
-.ficha { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 4px 20px; }
-.ficha div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; padding-block: 11px; border-bottom: 1px solid var(--line); }
-.ficha div:last-child { border-bottom: 0; }
-.ficha dt { color: var(--muted); font-size: var(--step--1); }
-.ficha dd { margin: 0; font-family: var(--font-mono); font-size: 0.85rem; min-width: 0; }
-
-/* Botones de contacto */
-:root { --wa: #1faa59; --wa-ink: #ffffff; }
+/* Botones */
 .botones { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .btn { display: inline-flex; align-items: center; gap: 8px; font: 700 var(--step-0) var(--font-body); text-decoration: none;
        border-radius: 999px; padding: 11px 20px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
@@ -133,86 +157,86 @@ figure { margin: 0; }
                box-shadow: 0 6px 20px rgb(0 0 0 / 0.25); z-index: 10; }
 .wa-flotante svg { width: 30px; height: 30px; }
 
-/* Antes y despues */
-.antes-despues { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(16px, 4vw, 40px); align-items: center; }
-.antes-despues > figure { min-width: 0; }
-.antes-despues .horizontal { aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid var(--line); }
-.antes-despues .horizontal video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.antes-despues .tel { width: min(100%, 260px); margin-inline: auto; }
-.etiqueta { display: inline-block; font: 700 0.78rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase;
-            padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; background: var(--surface); border: 1px solid var(--line); }
-.etiqueta.despues { background: var(--caption); color: var(--caption-ink); border-color: var(--caption); }
-.antes-despues figcaption { margin-top: 10px; color: var(--muted); font-size: var(--step--1); }
-.cambios { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 20px 0 0; list-style: none; }
-.cambios li { font-size: var(--step--1); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); }
-
-/* Sobre mi */
-.sobre { display: grid; grid-template-columns: 160px 1fr; gap: clamp(20px, 4vw, 40px); align-items: center; }
-.sobre img { width: 160px; height: 160px; border-radius: 50%; }
-.sobre p { max-width: 62ch; margin: 12px 0 0; }
-
 /* Paquetes */
 .paquetes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-.paquete.destacado { border: 2px solid var(--caption); position: relative; }
-.sello { justify-self: start; font: 700 0.72rem var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase;
+.paquete { position: relative; display: grid; gap: 12px; align-content: start; background: var(--surface); border: 1px solid var(--line);
+           border-radius: var(--radius); padding: 22px 20px; min-width: 0; }
+.paquete.destacado { border: 2px solid var(--caption); }
+.paquete h3 { font: 900 var(--step-1) var(--font-display); margin: 0; }
+.paquete ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.paquete .btn { justify-self: start; font-size: var(--step--1); padding: 8px 16px; }
+.sello { justify-self: start; font: 700 0.72rem var(--font-body); letter-spacing: 0.06em; text-transform: uppercase;
          background: var(--caption); color: var(--caption-ink); padding: 3px 10px; border-radius: 6px; }
 .monto { margin: 0; font-size: var(--step--1); color: var(--muted); }
 .monto b { font: 900 var(--step-2) var(--font-display); color: var(--ink); }
 .monto s { font-size: var(--step-0); }
 .nota { margin: 0; font-size: var(--step--1); color: var(--muted); }
-.paquete { display: grid; gap: 12px; align-content: start; background: var(--surface); border: 1px solid var(--line);
-           border-radius: var(--radius); padding: 22px 20px; min-width: 0; }
-.paquete h3 { font: 900 var(--step-1) var(--font-display); margin: 0; }
-.paquete ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
-.paquete .precio { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
-.paquete .btn { justify-self: start; font-size: var(--step--1); padding: 8px 16px; }
-.extra { margin-top: 16px; padding: 14px 18px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); }
+.extra { margin-top: 16px; font-size: var(--step--1); color: var(--muted); }
 
 /* Preguntas frecuentes */
 .faq { display: grid; gap: 10px; max-width: 760px; }
 .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
-.faq summary { font-weight: 700; cursor: pointer; }
-.faq details p { margin: 10px 0 0; color: var(--muted); }
+.faq summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 500 1.4rem/1 var(--font-body); color: var(--muted); transition: transform .3s var(--suave); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 10px 0 0; color: var(--muted); overflow: hidden; }
 
 .cierre { display: grid; gap: 16px; justify-items: start; }
 .cierre p { margin: 0; color: var(--muted); max-width: 60ch; }
 footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 
-/* Luces: un resplandor suave del color del video que se senala, y brillo en botones y tarjetas */
-:root { --aura-alfa: 0.16; --brillo-alfa: 0.38; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --aura-alfa: 0.26; --brillo-alfa: 0.55; } }
-:root[data-theme="dark"] { --aura-alfa: 0.26; --brillo-alfa: 0.55; }
+/* Luces: resplandor suave del color del video que suena, y brillo en botones y tarjetas */
 .aura { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0;
         background: radial-gradient(520px circle at var(--gx, 50%) var(--gy, 50%), rgb(var(--aura, 255 214 10) / var(--aura-alfa)), transparent 70%);
         transition: opacity .8s ease; }
 .aura.encendida { opacity: 1; }
-.wrap { position: relative; z-index: 1; }
-.tel, .antes-despues .horizontal { transition: box-shadow .6s ease; }
+.tel { transition: box-shadow .6s ease; }
 .con-luz:hover, .con-luz.sonando, .con-luz:focus-within { box-shadow: 0 0 46px -8px rgb(var(--c, 255 214 10) / var(--brillo-alfa)); }
-.btn, .copiar, .idioma button { transition: box-shadow .3s ease, transform .3s ease, filter .3s ease; }
+.btn, .copiar, .idioma button, .wa-flotante { transition: box-shadow .3s ease, transform .3s ease; }
 .btn:hover, .btn:focus-visible { box-shadow: 0 0 22px -4px rgb(255 214 10 / var(--brillo-alfa)); transform: translateY(-1px); }
 .btn-wa:hover, .btn-wa:focus-visible, .wa-flotante:hover { box-shadow: 0 0 26px -2px rgb(31 170 89 / 0.6); }
-.wa-flotante { transition: box-shadow .3s ease, transform .3s ease; }
 .wa-flotante:hover { transform: scale(1.06); }
-.copiar:hover, .copiar:focus-visible { box-shadow: 0 0 20px -2px rgb(255 214 10 / 0.7); filter: brightness(1.05); }
+.copiar:hover, .copiar:focus-visible { border-color: var(--caption); }
 .paquete { transition: box-shadow .5s ease, border-color .5s ease; }
 .paquete:hover { box-shadow: 0 0 34px -10px rgb(255 214 10 / var(--brillo-alfa)); border-color: rgb(255 214 10 / 0.6); }
-@media (prefers-reduced-motion: reduce) {
-  .aura, .tel, .antes-despues .horizontal, .btn, .copiar, .paquete, .wa-flotante { transition: none; }
-  .btn:hover, .wa-flotante:hover { transform: none; }
+
+/* ---- Animaciones (solo con .anim: el visitante no pidio "reducir movimiento") ---- */
+/* 1. Las secciones aparecen suaves al llegar a ellas */
+.anim .revelar { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--suave), transform .8s var(--suave); }
+.anim .revelar.visto { opacity: 1; transform: none; }
+/* 2. La caja amarilla de los titulares se pinta como un resaltador, de izquierda a derecha */
+.anim .hl { background: linear-gradient(var(--caption), var(--caption)) no-repeat 0 0 / 0% 100%; color: inherit;
+            transition: background-size .75s var(--suave) .2s, color .3s ease .45s; }
+.anim .hl.pintado { background-size: 100% 100%; color: var(--caption-ink); }
+/* 3. El boton de WhatsApp late UNA vez (a los 10 s) para que se note, sin quedarse moviendo */
+@keyframes latido {
+  0% { transform: scale(1); box-shadow: 0 6px 20px rgb(0 0 0 / 0.25), 0 0 0 0 rgb(31 170 89 / 0.55); }
+  30% { transform: scale(1.12); }
+  60% { transform: scale(1); }
+  100% { transform: scale(1); box-shadow: 0 6px 20px rgb(0 0 0 / 0.25), 0 0 0 18px rgb(31 170 89 / 0); }
 }
+.anim .wa-flotante.llama { animation: latido 1.1s var(--suave) 2; }
+/* 4. El paquete recomendado: un brillo recorre su borde una vez cuando aparece */
+.anim .destacado::after { content: ""; position: absolute; inset: -2px; border-radius: inherit; pointer-events: none; padding: 2px;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.95) 50%, transparent 65%) -150% 0 / 250% 100% no-repeat;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.anim .destacado.visto::after { animation: brillo 1.6s ease .5s 1 both; }
+@keyframes brillo { from { background-position: -150% 0; } to { background-position: 250% 0; } }
 
 @media (max-width: 760px) {
   .hero { grid-template-columns: 1fr; }
   .hero-clip { order: -1; width: min(70%, 260px); }
   .clips { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; }
   .incluye, .pasos, .calidad, .antes-despues { grid-template-columns: 1fr; }
+  .comparar { margin-inline: auto; }
   .sobre { grid-template-columns: 1fr; justify-items: start; }
-  .sobre img { width: 110px; height: 110px; }
+  .sobre img { width: 100px; height: 100px; }
   .ficha div { grid-template-columns: 1fr; gap: 2px; }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .hl { transition: background-color .2s; }
+@media (prefers-reduced-motion: reduce) {
+  .aura, .tel, .btn, .copiar, .paquete, .wa-flotante, .faq summary::after { transition: none; }
+  .btn:hover, .wa-flotante:hover { transform: none; }
 }
 </style>
 </head>
@@ -241,8 +265,9 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
           </a>
         </div>
         <div class="email">
+          <span data-i18n="o-correo">o por correo:</span>
           <code id="mail">ragebaiterclipper@gmail.com</code>
-          <button type="button" class="copiar" id="copiar" data-i18n="copiar">Copiar email</button>
+          <button type="button" class="copiar" id="copiar" data-i18n="copiar">Copiar</button>
         </div>
       </div>
     </div>
@@ -250,130 +275,105 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       <div class="tel">
         <video data-luz="255 214 10" src="clips/clip4.mp4" poster="clips/clip4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Ejemplo de clip editado"></video>
       </div>
-      <p class="specs">9:16 · 1080×1920 · -14 LUFS</p>
     </div>
   </div>
 
-  <section aria-labelledby="t-ejemplos">
+  <section aria-labelledby="t-ejemplos" class="revelar">
     <h2 id="t-ejemplos" data-i18n-html="h-ejemplos">Ejemplos de <span class="hl">mi edición</span></h2>
-    <p class="sub" data-i18n="sub-ejemplos">Clips completos, con sonido. Así quedan listos para subir.</p>
+    <p class="sub" data-i18n="sub-ejemplos">Clips completos, listos para subir. Activa el sonido para verlos como en el celular.</p>
     <div class="clips">
       <figure class="clip">
-        <div class="tel"><video data-luz="255 214 10" src="clips/clip7.mp4" poster="clips/clip7.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="255 214 10" src="clips/clip7.mp4" poster="clips/clip7.jpg" controls muted loop playsinline preload="none"></video></div>
         <figcaption><b>El peor error de conducir en el juego</b><span data-i18n="cat-gaming">Gaming · 0:20</span></figcaption>
       </figure>
       <figure class="clip">
-        <div class="tel"><video data-luz="70 230 140" src="clips/clip6.mp4" poster="clips/clip6.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="70 230 140" src="clips/clip6.mp4" poster="clips/clip6.jpg" controls muted loop playsinline preload="none"></video></div>
         <figcaption><b>El cuerpo me está pidiendo basta</b><span data-i18n="cat-reto">Aventura / reto · 1:02</span></figcaption>
       </figure>
       <figure class="clip">
-        <div class="tel"><video data-luz="56 189 248" src="clips/clip10.mp4" poster="clips/clip10.jpg" controls playsinline preload="none"></video></div>
+        <div class="tel"><video data-luz="56 189 248" src="clips/clip10.mp4" poster="clips/clip10.jpg" controls muted loop playsinline preload="none"></video></div>
         <figcaption><b>Lo que le vamos a regalar al público</b><span data-i18n="cat-vlog">Vlog / música · 0:42</span></figcaption>
       </figure>
     </div>
     <p class="aviso" data-i18n="aviso">Ejemplos hechos con contenido público de The Wild Project (con Luisito Comunica), Carrero, Mateu Hernández, Cero y YSY A, en YouTube, para mostrar el estilo de edición. No son clientes ni trabajos encargados.</p>
   </section>
 
-  <section aria-labelledby="t-antes">
-    <h2 id="t-antes" data-i18n-html="h-antes">Antes y <span class="hl">después</span></h2>
-    <p class="sub" data-i18n="sub-antes">El mismo momento: a la izquierda, el video original tal como se grabó; a la derecha, el clip que entrego.</p>
+  <section aria-labelledby="t-antes" class="revelar">
     <div class="antes-despues">
-      <figure>
-        <span class="etiqueta" data-i18n="antes">Antes</span>
-        <div class="horizontal"><video data-luz="56 189 248" src="clips/antes_ysya.mp4" poster="clips/antes_ysya.jpg" controls playsinline preload="none"></video></div>
-        <figcaption data-i18n="antes-pie">Video original: horizontal, un show en vivo, sin subtítulos.</figcaption>
-      </figure>
-      <figure>
-        <span class="etiqueta despues" data-i18n="despues">Después</span>
-        <div class="tel"><video data-luz="56 189 248" src="clips/clip9.mp4" poster="clips/clip9.jpg" controls playsinline preload="none"></video></div>
-        <figcaption data-i18n="despues-pie">Mi clip: vertical, listo para publicar.</figcaption>
-      </figure>
+      <div class="tel comparar" id="comparar">
+        <video class="c-antes" src="clips/antes_ysya.mp4" poster="clips/antes_ysya.jpg" muted playsinline preload="none" aria-hidden="true"></video>
+        <video class="c-despues" data-luz="56 189 248" src="clips/clip9.mp4" poster="clips/clip9.jpg" muted loop playsinline preload="none" aria-label="Clip editado"></video>
+        <span class="c-tag c-tag-antes" data-i18n="antes">Antes</span>
+        <span class="c-tag c-tag-despues" data-i18n="despues">Después</span>
+        <div class="c-linea" aria-hidden="true"><span></span></div>
+        <input type="range" min="0" max="100" value="50" id="corte" aria-label="Comparar antes y después">
+        <button type="button" class="c-sonido" id="c-sonido" aria-label="Activar sonido" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path class="c-onda" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14" hidden/><path class="c-mudo" d="m22 9-6 6m0-6 6 6"/></svg>
+        </button>
+      </div>
+      <div>
+        <h2 id="t-antes" data-i18n-html="h-antes">Antes y <span class="hl">después</span></h2>
+        <p class="sub" data-i18n="sub-antes">El mismo momento: el video original tal como se grabó y el clip que entrego. Desliza la barra para comparar.</p>
+        <ul class="cambios">
+          <li data-i18n="cambio1">Encuadre en quien habla</li>
+          <li data-i18n="cambio2">Subtítulos palabra por palabra</li>
+          <li data-i18n="cambio3">Título gancho</li>
+          <li data-i18n="cambio4">Audio nivelado</li>
+        </ul>
+      </div>
     </div>
-    <ul class="cambios">
-      <li data-i18n="cambio1">Encuadre en quien habla</li>
-      <li data-i18n="cambio2">Subtítulos palabra por palabra</li>
-      <li data-i18n="cambio3">Título gancho</li>
-      <li data-i18n="cambio4">Audio nivelado</li>
-    </ul>
   </section>
 
-  <section aria-labelledby="t-incluye">
+  <section aria-labelledby="t-incluye" class="revelar">
     <h2 id="t-incluye" data-i18n-html="h-incluye">Qué lleva <span class="hl">cada clip</span></h2>
     <p class="sub" data-i18n="sub-incluye">Lo que ves en los ejemplos, aplicado a tu contenido.</p>
     <ul class="incluye">
-      <li><div><b data-i18n="f1">Subtítulos animados</b><small data-i18n="f1d">Palabra por palabra, con las palabras clave resaltadas.</small></div><span class="dato">word-by-word</span></li>
-      <li><div><b data-i18n="f2">Título gancho</b><small data-i18n="f2d">Una frase arriba que hace que se queden a mirar.</small></div><span class="dato">0–3 s</span></li>
-      <li><div><b data-i18n="f3">Zooms en el momento fuerte</b><small data-i18n="f3d">Siguen tu cara, con sonido de impacto.</small></div><span class="dato">auto-track</span></li>
-      <li><div><b data-i18n="f4">Formato para streams</b><small data-i18n="f4d">El juego arriba y tu cámara abajo, sin recortar.</small></div><span class="dato">split 9:16</span></li>
-      <li><div><b data-i18n="f5">Podcasts con varias personas</b><small data-i18n="f5d">El zoom va a quien está hablando.</small></div><span class="dato">speaker ID</span></li>
-      <li><div><b data-i18n="f6">Listo para publicar</b><small data-i18n="f6d">Audio nivelado, descripción y hashtags incluidos.</small></div><span class="dato">-14 LUFS</span></li>
+      <li><b data-i18n="f1">Subtítulos animados</b><small data-i18n="f1d">Palabra por palabra, con las palabras clave resaltadas.</small></li>
+      <li><b data-i18n="f2">Título gancho</b><small data-i18n="f2d">Una frase al inicio que hace que se queden a mirar.</small></li>
+      <li><b data-i18n="f3">Zooms en el momento fuerte</b><small data-i18n="f3d">Van a la cara de quien habla, con sonido de impacto.</small></li>
+      <li><b data-i18n="f4">Formato para streams</b><small data-i18n="f4d">El juego arriba y tu cámara abajo, sin recortar.</small></li>
+      <li><b data-i18n="f5">Podcasts con varias personas</b><small data-i18n="f5d">La cámara sigue a quien está hablando.</small></li>
+      <li><b data-i18n="f6">Listo para publicar</b><small data-i18n="f6d">Con portada, descripción y hashtags.</small></li>
     </ul>
   </section>
 
-  <section aria-labelledby="t-calidad" class="calidad">
-    <div class="calidad-txt">
+  <section aria-labelledby="t-calidad" class="calidad revelar">
+    <div>
       <h2 id="t-calidad" data-i18n-html="h-calidad">Calidad de <span class="hl">verdad</span>, no solo bonito</h2>
-      <p class="sub" data-i18n="sub-calidad">Cada clip sale del video original en alta calidad y con el audio ajustado al nivel que usan las plataformas. Se ve nítido y suena parejo, en cualquier celular.</p>
-      <div class="medidor" role="img" aria-label="Medidor de volumen: muy bajo a -20 LUFS, mis clips a -14 LUFS, saturado a -8 LUFS">
-        <div class="medidor-barra">
-          <span class="zona baja" data-i18n="m-bajo">Muy bajo</span>
-          <span class="zona ok" data-i18n="m-ok">Mis clips</span>
-          <span class="zona alta" data-i18n="m-alto">Saturado</span>
-          <span class="aguja" aria-hidden="true"></span>
-        </div>
-        <div class="medidor-escala" aria-hidden="true"><span>-20</span><span>-14 LUFS</span><span>-8</span></div>
-      </div>
+      <p class="sub" data-i18n="sub-calidad">Cada clip sale del video original en alta calidad y con el audio al nivel que usan las plataformas. Se ve nítido y suena parejo en cualquier celular.</p>
     </div>
     <dl class="ficha">
       <div><dt data-i18n="c1">Resolución</dt><dd>1080 × 1920</dd></div>
       <div><dt data-i18n="c2">Fluidez</dt><dd data-i18n="c2v">Hasta 60 fps</dd></div>
-      <div><dt data-i18n="c3">Calidad de imagen</dt><dd data-i18n="c3v">Hasta 12 Mbps, del original en 1080p</dd></div>
-      <div><dt data-i18n="c4">Volumen</dt><dd data-i18n="c4v">-14 LUFS, el nivel de YouTube y Spotify</dd></div>
-      <div><dt data-i18n="c5">Voz y efectos</dt><dd data-i18n="c5v">Efectos mezclados sin tapar la voz</dd></div>
+      <div><dt data-i18n="c4">Volumen</dt><dd data-i18n="c4v">Parejo, al nivel de TikTok y YouTube</dd></div>
       <div><dt data-i18n="c6">Ritmo</dt><dd data-i18n="c6v">Sin silencios largos ni partes que se van del tema</dd></div>
-      <div><dt data-i18n="c7">Cortes</dt><dd data-i18n="c7v">Sin pérdida de calidad al cortar</dd></div>
       <div><dt data-i18n="c8">Subtítulos</dt><dd data-i18n="c8v">Revisados palabra por palabra</dd></div>
-      <div><dt data-i18n="c9">Extra</dt><dd data-i18n="c9v">Portada de cada clip incluida</dd></div>
     </dl>
   </section>
 
-  <section aria-labelledby="t-sobre" class="sobre">
-    <img src="icono-512.png" alt="Logo de Ragebaiter Clips" width="160" height="160">
-    <div>
-      <h2 id="t-sobre" data-i18n-html="h-sobre">Sobre <span class="hl">mí</span></h2>
-      <p data-i18n="sobre1">Soy Ariel, editor de clips verticales desde Bolivia. Me dedico a convertir streams, podcasts y videos largos en clips para TikTok, Reels y Shorts.</p>
-      <p data-i18n="sobre2">Trabajas directamente conmigo, sin intermediarios: hablas con la misma persona que edita tus videos y que responde por cada entrega.</p>
-      <p data-i18n="sobre3">Trabajar desde Bolivia me permite ofrecer precios más accesibles que la mayoría de editores, sin resignar calidad. Por eso empiezo siempre con 3 clips de muestra gratuitos: prefiero que juzgues mi trabajo por los resultados.</p>
-    </div>
-  </section>
-
-  <section aria-labelledby="t-pasos">
+  <section aria-labelledby="t-pasos" class="revelar">
     <h2 id="t-pasos" data-i18n-html="h-pasos">Cómo <span class="hl">trabajamos</span></h2>
-    <p class="sub" data-i18n="sub-pasos">Tú sigues haciendo directos. Yo me encargo del resto.</p>
+    <p class="sub" data-i18n="sub-pasos">Tú sigues creando. Yo me encargo del resto.</p>
     <ol class="pasos">
       <li><b data-i18n="p1">Me pasas el link</b><p data-i18n="p1d">Tu VOD de Twitch o Kick, tu podcast o tu video de YouTube.</p></li>
       <li><b data-i18n="p2">Elijo los mejores momentos</b><p data-i18n="p2d">Reviso todo el video y saco las partes con más gancho.</p></li>
-      <li><b data-i18n="p3">Recibes los clips</b><p data-i18n="p3d">Editados, en vertical y con su texto para publicar.</p></li>
+      <li><b data-i18n="p3">Recibes los clips</b><p data-i18n="p3d">Editados, en vertical y con su texto para publicar, en 1 a 4 días.</p></li>
     </ol>
   </section>
 
-  <section aria-labelledby="t-paquetes">
+  <section aria-labelledby="t-paquetes" class="revelar">
     <h2 id="t-paquetes" data-i18n-html="h-paquetes">Paquetes <span class="hl">semanales</span></h2>
-    <p class="sub" data-i18n="sub-paquetes">Elige según la cantidad de contenido que publicas. Los precios están en bolivianos; si te encuentras en otro país, escríbeme y te envío una cotización.</p>
+    <p class="sub" data-i18n="sub-paquetes">Elige según cuánto publicas. Precios en bolivianos; si estás en otro país, escríbeme y te paso una cotización.</p>
     <div class="paquetes">
       <div class="paquete">
         <h3 data-i18n="pq1">Inicial</h3>
         <p class="monto"><b>Bs 220</b> <span data-i18n="por-semana">por semana</span></p>
-        <p class="nota" data-i18n="pq1-nota">Para conocer mi trabajo: disponible hasta por 2 semanas.</p>
+        <p class="nota" data-i18n="pq1-nota">Para conocer mi trabajo: hasta 2 semanas.</p>
         <ul>
-          <li data-i18n-html="pq1a"><b>7 clips</b> verticales por semana</li>
-          <li data-i18n="pq1b">Formato para TikTok, Reels y Shorts</li>
-          <li data-i18n="pq1c">Selección de los mejores momentos</li>
-          <li data-i18n="pq1d">Subtítulos animados palabra por palabra</li>
-          <li data-i18n="pq1e">Título gancho y zooms en los momentos clave</li>
-          <li data-i18n="pq1f">Exportación en la máxima calidad del video original</li>
-          <li data-i18n="pq1g">Entrega en un solo envío</li>
-          <li data-i18n="pq1h">1 ronda de modificaciones</li>
+          <li data-i18n-html="pq1a"><b>7 clips</b> por semana</li>
+          <li data-i18n="pq1b">Todo lo que lleva cada clip</li>
+          <li data-i18n="pq1c">Entrega en un solo envío</li>
+          <li data-i18n="pq1d">1 ronda de cambios</li>
         </ul>
         <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
@@ -381,82 +381,77 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
         <span class="sello" data-i18n="sello">Precio de lanzamiento</span>
         <h3 data-i18n="pq2">Semanal</h3>
         <p class="monto"><s>Bs 350</s> <b>Bs 250</b> <span data-i18n="por-semana">por semana</span></p>
-        <p class="nota" data-i18n="pq2-nota">Bs 250 durante las primeras 4 semanas; luego, Bs 350.</p>
+        <p class="nota" data-i18n="pq2-nota">Bs 250 las primeras 4 semanas; luego, Bs 350.</p>
         <ul>
-          <li data-i18n-html="pq2a"><b>10 clips</b> verticales por semana</li>
-          <li data-i18n="pq2b">Todo lo del pack Inicial, y además:</li>
+          <li data-i18n-html="pq2a"><b>10 clips</b> por semana</li>
+          <li data-i18n="pq2b">Todo lo del Inicial, y además:</li>
           <li data-i18n="pq2c">Subtítulos con los colores de tu marca</li>
-          <li data-i18n="pq2d">Zooms que siguen al protagonista</li>
-          <li data-i18n="pq2e">Exportación en 1080p</li>
-          <li data-i18n="pq2f">Entrega en 2 tandas durante la semana</li>
-          <li data-i18n="pq2g">1 ronda de modificaciones</li>
+          <li data-i18n="pq2d">Entrega en 2 tandas por semana</li>
         </ul>
         <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
         <h3 data-i18n="pq3">Creador</h3>
-        <p class="monto"><b data-i18n="a-consultar">Precio a consultar</b></p>
+        <p class="monto"><b data-i18n="a-consultar">A consultar</b></p>
         <p class="nota" data-i18n="pq3-nota">Para quienes publican todos los días.</p>
         <ul>
-          <li data-i18n-html="pq3a"><b>15 clips</b> verticales por semana</li>
-          <li data-i18n="pq3b">Todo lo del pack Semanal, y además:</li>
-          <li data-i18n="pq3c">Estilo propio: tus colores y tu tipografía</li>
-          <li data-i18n="pq3d">2 rondas de modificaciones</li>
+          <li data-i18n-html="pq3a"><b>15 clips</b> por semana</li>
+          <li data-i18n="pq3b">Todo lo del Semanal, y además:</li>
+          <li data-i18n="pq3c">Tu propio estilo: colores y tipografía</li>
+          <li data-i18n="pq3d">2 rondas de cambios</li>
         </ul>
         <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
       <div class="paquete">
         <h3 data-i18n="pq4">Streamer</h3>
-        <p class="monto"><b data-i18n="a-consultar">Precio a consultar</b></p>
+        <p class="monto"><b data-i18n="a-consultar">A consultar</b></p>
         <p class="nota" data-i18n="pq4-nota">Para quienes transmiten varias veces por semana.</p>
         <ul>
-          <li data-i18n-html="pq4a"><b>25 clips</b> verticales por semana</li>
-          <li data-i18n="pq4b">Todo lo del pack Creador, y además:</li>
-          <li data-i18n="pq4c">Formato de stream: juego arriba y cámara abajo</li>
-          <li data-i18n="pq4d">Entregas a lo largo de la semana</li>
+          <li data-i18n-html="pq4a"><b>25 clips</b> por semana</li>
+          <li data-i18n="pq4b">Todo lo del Creador, y además:</li>
+          <li data-i18n="pq4c">Entregas a lo largo de la semana</li>
         </ul>
         <a class="btn wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Consultar</a>
       </div>
     </div>
-    <p class="extra" data-i18n="pq-extra">Servicios adicionales: publicación de los clips en tus cuentas (community manager) y entregas urgentes, cada uno por un pequeño costo adicional.</p>
+    <p class="extra" data-i18n="pq-extra">Aparte, por un pequeño costo: publicación de los clips en tus cuentas y entregas urgentes.</p>
   </section>
 
-  <section aria-labelledby="t-faq">
+  <section aria-labelledby="t-sobre" class="sobre revelar">
+    <img src="icono-512.png" alt="Logo de Ragebaiter Clips" width="140" height="140">
+    <div>
+      <h2 id="t-sobre" data-i18n-html="h-sobre">Sobre <span class="hl">mí</span></h2>
+      <p data-i18n="sobre1">Soy Ariel, editor de clips verticales desde Bolivia. Trabajas directamente conmigo, sin intermediarios: la misma persona que edita tus videos es la que te responde.</p>
+      <p data-i18n="sobre2">Trabajar desde Bolivia me permite cobrar menos que la mayoría de editores sin bajar la calidad. Por eso empiezo con 3 clips de muestra gratis: prefiero que me juzgues por los resultados.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-faq" class="revelar">
     <h2 id="t-faq" data-i18n-html="h-faq">Preguntas <span class="hl">frecuentes</span></h2>
     <p class="sub" data-i18n="sub-faq">Si tienes otra duda, escríbeme y te respondo personalmente.</p>
     <div class="faq">
       <details><summary data-i18n="q1">¿Cuánto tardas en entregar los clips?</summary>
-        <p data-i18n="a1">Entre 1 y 4 días, según la duración del material y la cantidad de clips. Si tienes una fecha límite, indícamela al hacer el pedido y lo coordinamos.</p></details>
-      <details><summary data-i18n="q2">¿Cuántos clips se obtienen de un stream?</summary>
-        <p data-i18n="a2">Depende del contenido. Como referencia, de un stream de más de 2 horas obtengo al menos 5 clips. Selecciono únicamente los momentos con potencial real.</p></details>
-      <details><summary data-i18n="q3">¿Puedo pedir cambios?</summary>
-        <p data-i18n="a3">Sí. Los packs Inicial y Semanal incluyen una ronda de modificaciones, y los packs Creador y Streamer, dos.</p></details>
-      <details><summary data-i18n="q4">¿Quién publica los clips?</summary>
-        <p data-i18n="a4">Tú, en tus propias cuentas: te los entrego listos para subir, con su descripción y hashtags. Si prefieres que yo me encargue de publicarlos, ofrezco el servicio de community manager por un costo adicional reducido.</p></details>
+        <p data-i18n="a1">Entre 1 y 4 días, según la duración del material y la cantidad de clips. Si tienes una fecha límite, avísame al hacer el pedido y lo coordinamos.</p></details>
+      <details><summary data-i18n="q2">¿Cuántos clips salen de un stream?</summary>
+        <p data-i18n="a2">Depende del contenido. Como referencia, de un stream de más de 2 horas salen al menos 5 clips. Solo elijo momentos con potencial real.</p></details>
       <details><summary data-i18n="q5">¿Qué necesito enviarte?</summary>
-        <p data-i18n="a5">Únicamente los links de los videos o streams que quieres convertir en clips. Del resto me encargo yo.</p></details>
-      <details><summary data-i18n="q6">¿En qué formato recibo los clips?</summary>
-        <p data-i18n="a6">En video vertical de 1080 × 1920 (MP4), listo para TikTok, Reels y Shorts, junto con una imagen de portada, la descripción y los hashtags de cada clip.</p></details>
+        <p data-i18n="a5">Solo los links de los videos o streams que quieres convertir en clips. Del resto me encargo yo.</p></details>
+      <details><summary data-i18n="q6">¿Cómo y en qué formato recibo los clips?</summary>
+        <p data-i18n="a6">En video vertical MP4 de 1080 × 1920, listo para TikTok, Reels y Shorts, con su portada, descripción y hashtags. Te los dejo en una carpeta de Google Drive compartida contigo.</p></details>
+      <details><summary data-i18n="q4">¿Quién publica los clips?</summary>
+        <p data-i18n="a4">Tú, en tus propias cuentas: te los entrego listos para subir. Si prefieres que los publique yo, lo hago por un pequeño costo adicional.</p></details>
       <details><summary data-i18n="q7">¿Trabajas con contenido en inglés?</summary>
         <p data-i18n="a7">Sí. Edito contenido en español y en inglés, con los subtítulos en el idioma del video.</p></details>
-      <details><summary data-i18n="q8">¿Los clips de muestra tienen algún costo?</summary>
-        <p data-i18n="a8">No. Los 3 clips de muestra son gratuitos y sin compromiso. Si te convencen, conversamos sobre el paquete que mejor se adapte a ti.</p></details>
-      <details><summary data-i18n="q9">¿Cómo se realiza el pago?</summary>
-        <p data-i18n="a9">En Bolivia, mediante pago por QR. Al contratar cualquier paquete se abona el 50% por adelantado y el 50% restante una vez que recibes los clips. Si te encuentras en otro país, escríbeme y coordinamos el medio de pago.</p></details>
-      <details><summary data-i18n="q10">¿Cómo recibo los clips?</summary>
-        <p data-i18n="a10">En una carpeta de Google Drive compartida contigo, desde donde puedes descargarlos cuando lo necesites.</p></details>
-      <details><summary data-i18n="q11">¿Puedo elegir los colores, la tipografía o el estilo de los subtítulos?</summary>
-        <p data-i18n="a11">Sí. Puedes indicarme los colores, la tipografía y el estilo de tu marca; y si te gusta la estética que utilizo habitualmente, la aplico tal cual. Como prefieras.</p></details>
-      <details><summary data-i18n="q12">¿Haces entregas urgentes?</summary>
-        <p data-i18n="a12">Sí, por un pequeño costo adicional. Indícamelo al hacer el pedido y priorizo tu entrega.</p></details>
+      <details><summary data-i18n="q9">¿Cómo se paga?</summary>
+        <p data-i18n="a9">En Bolivia, por QR: 50% por adelantado y 50% cuando recibes los clips. Si estás en otro país, escríbeme y coordinamos el medio de pago.</p></details>
       <details><summary data-i18n="q13">¿Mi contenido queda privado?</summary>
-        <p data-i18n="a13">Sí, si así lo decides. Tu contenido te pertenece: si en algún momento quisiera mostrar alguno de tus clips en mi portafolio, te pediré permiso antes.</p></details>
+        <p data-i18n="a13">Sí. Tu contenido te pertenece: si alguna vez quisiera mostrar uno de tus clips en mi portafolio, te pediré permiso antes.</p></details>
     </div>
   </section>
 
-  <section class="cierre" aria-labelledby="t-precio">
+  <section class="cierre revelar" aria-labelledby="t-precio">
     <h2 id="t-precio" data-i18n-html="h-precio">Empieza con <span class="hl">3 clips gratis</span></h2>
-    <p data-i18n="precio">El precio depende de cuántos clips por semana necesites. Escríbeme por WhatsApp o por correo con el link de tu último video y te envío la muestra.</p>
+    <p data-i18n="precio">Mándame el link de tu último video por WhatsApp o por correo y te envío la muestra.</p>
     <div class="botones">
       <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
@@ -464,8 +459,9 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
       </a>
     </div>
     <div class="email">
+      <span data-i18n="o-correo">o por correo:</span>
       <code>ragebaiterclipper@gmail.com</code>
-      <button type="button" class="copiar" id="copiar2" data-i18n="copiar">Copiar email</button>
+      <button type="button" class="copiar" id="copiar2" data-i18n="copiar">Copiar</button>
     </div>
     <footer data-i18n="footer">Ariel · Ragebaiter Clips</footer>
   </section>
@@ -477,108 +473,84 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
 
 <script>
 (function () {
+  var mov = document.documentElement.classList.contains("anim");
   var textos = {
     en: {
       h1: 'You hit record. I make sure <span class="hl">you get seen.</span>',
       lead: "I'm Ariel. I edit vertical clips for TikTok, Reels and Shorts from your streams, podcasts and long videos.",
       oferta: "I'll make you 3 free sample clips from your latest video.",
       oferta2: "No strings attached: if you like them, we'll talk :)",
-      copiar: "Copy email",
+      "o-correo": "or by email:", copiar: "Copy", copiado: "Copied!",
       "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
-      "sub-ejemplos": "Full clips, with sound. This is how they look when they're ready to post.",
+      "sub-ejemplos": "Full clips, ready to post. Turn the sound on to watch them like on a phone.",
       "cat-gaming": "Gaming · 0:20", "cat-reto": "Adventure / challenge · 1:02", "cat-vlog": "Vlog / music · 0:42",
       aviso: "Examples made from public YouTube content by The Wild Project (with Luisito Comunica), Carrero, Mateu Hernández, Cero and YSY A to show my editing style. They are not clients or commissioned jobs.",
+      "h-antes": 'Before and <span class="hl">after</span>',
+      "sub-antes": "The same moment: the original video as it was recorded and the clip I deliver. Drag the bar to compare.",
+      antes: "Before", despues: "After",
+      cambio1: "Framed on whoever is talking", cambio2: "Word-by-word captions", cambio3: "Hook title", cambio4: "Leveled audio",
       "h-incluye": 'What <span class="hl">every clip</span> gets',
       "sub-incluye": "Everything you see in the examples, applied to your content.",
       f1: "Animated captions", f1d: "Word by word, with the key words highlighted.",
-      f2: "Hook title", f2d: "One line on top that makes people stay.",
-      f3: "Zooms on the big moment", f3d: "They follow your face, with an impact sound.",
+      f2: "Hook title", f2d: "One line at the start that makes people stay.",
+      f3: "Zooms on the big moment", f3d: "On the face of whoever is talking, with an impact sound.",
       f4: "Stream layout", f4d: "Gameplay on top and your camera below, nothing cropped out.",
-      f5: "Podcasts with several people", f5d: "The zoom goes to whoever is talking.",
-      f6: "Ready to post", f6d: "Leveled audio, caption and hashtags included.",
+      f5: "Podcasts with several people", f5d: "The camera follows whoever is talking.",
+      f6: "Ready to post", f6d: "With a cover image, caption and hashtags.",
       "h-calidad": '<span class="hl">Real</span> quality, not just pretty',
-      "sub-calidad": "Every clip is cut from the original video in high quality, with the audio set to the level the platforms use. Sharp to look at and even to listen to, on any phone.",
-      "m-bajo": "Too quiet", "m-ok": "My clips", "m-alto": "Distorted",
-      c1: "Resolution", c2: "Smoothness", c2v: "Up to 60 fps",
-      c3: "Image quality", c3v: "Up to 12 Mbps, from the 1080p original",
-      c4: "Loudness", c4v: "-14 LUFS, the YouTube and Spotify level",
-      c5: "Voice and effects", c5v: "Sound effects mixed without drowning the voice",
-      c6: "Pacing", c6v: "No long silences or off-topic tangents",
-      c7: "Cuts", c7v: "No quality loss when cutting",
-      c8: "Captions", c8v: "Checked word by word",
-      c9: "Extra", c9v: "A cover image for every clip",
+      "sub-calidad": "Every clip is cut from the original video in high quality, with the audio at the level the platforms use. Sharp to look at and even to listen to, on any phone.",
+      c1: "Resolution", c2: "Smoothness", c2v: "Up to 60 fps", c4: "Loudness", c4v: "Even, at TikTok and YouTube level",
+      c6: "Pacing", c6v: "No long silences or off-topic tangents", c8: "Captions", c8v: "Checked word by word",
       "h-pasos": 'How <span class="hl">it works</span>',
-      "sub-pasos": "You keep streaming. I take care of the rest.",
+      "sub-pasos": "You keep creating. I take care of the rest.",
       p1: "Send me the link", p1d: "Your Twitch or Kick VOD, your podcast or your YouTube video.",
       p2: "I pick the best moments", p2d: "I go through the whole video and cut the parts with the strongest hooks.",
-      p3: "You get the clips", p3d: "Edited, vertical and with their post caption.",
-      "h-precio": 'Start with <span class="hl">3 free clips</span>',
-      precio: "Pricing depends on how many clips per week you need. Message me on WhatsApp or by email with the link to your latest video and I'll send you the samples.",
-      "wa-boton": "Message me on WhatsApp",
-      "h-antes": 'Before and <span class="hl">after</span>',
-      "sub-antes": "The same moment: on the left, the original video as it was recorded; on the right, the clip I deliver.",
-      antes: "Before", despues: "After",
-      "antes-pie": "Original video: horizontal, a live show, no captions.",
-      "despues-pie": "My clip: vertical, ready to post.",
-      cambio1: "Framed on whoever is talking", cambio2: "Word-by-word captions", cambio3: "Hook title", cambio4: "Leveled audio",
-      "h-sobre": 'About <span class="hl">me</span>',
-      sobre1: "I'm Ariel, a vertical clip editor based in Bolivia. I turn streams, podcasts and long videos into clips for TikTok, Reels and Shorts.",
-      sobre2: "You work directly with me, with no middlemen: you talk to the same person who edits your videos and stands behind every delivery.",
-      sobre3: "Working from Bolivia lets me offer lower rates than most editors without cutting corners on quality. That's why I always start with 3 free sample clips: I'd rather you judge my work by the results.",
+      p3: "You get the clips", p3d: "Edited, vertical and with their post caption, in 1 to 4 days.",
       "h-paquetes": 'Weekly <span class="hl">packages</span>',
-      "sub-paquetes": "Choose based on how much content you post. Prices are in Bolivianos (BOB); if you're outside Bolivia, message me and I'll send you a quote.",
-      "por-semana": "per week", sello: "Launch price", "a-consultar": "Price on request", "pq-boton": "Ask",
-      pq1: "Starter", "pq1-nota": "To get to know my work: available for up to 2 weeks.",
-      pq1a: "<b>7 clips</b> per week", pq1b: "Formatted for TikTok, Reels and Shorts", pq1c: "Selection of the best moments",
-      pq1d: "Word-by-word animated captions", pq1e: "Hook title and zooms on the key moments",
-      pq1f: "Exported at the original video's highest quality", pq1g: "Delivered in a single batch", pq1h: "1 round of revisions",
+      "sub-paquetes": "Choose based on how much you post. Prices in Bolivianos (BOB); if you're outside Bolivia, message me and I'll send you a quote.",
+      "por-semana": "per week", sello: "Launch price", "a-consultar": "On request", "pq-boton": "Ask",
+      pq1: "Starter", "pq1-nota": "To get to know my work: up to 2 weeks.",
+      pq1a: "<b>7 clips</b> per week", pq1b: "Everything every clip gets", pq1c: "Delivered in a single batch", pq1d: "1 round of revisions",
       pq2: "Weekly", "pq2-nota": "Bs 250 for the first 4 weeks; Bs 350 afterwards.",
-      pq2a: "<b>10 clips</b> per week", pq2b: "Everything in Starter, plus:", pq2c: "Captions in your brand colors",
-      pq2d: "Zooms that follow the main speaker", pq2e: "1080p export", pq2f: "Delivered in 2 batches during the week",
-      pq2g: "1 round of revisions",
+      pq2a: "<b>10 clips</b> per week", pq2b: "Everything in Starter, plus:", pq2c: "Captions in your brand colors", pq2d: "Delivered in 2 batches a week",
       pq3: "Creator", "pq3-nota": "For creators who post every day.",
-      pq3a: "<b>15 clips</b> per week", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: your colors and font",
-      pq3d: "2 rounds of revisions",
+      pq3a: "<b>15 clips</b> per week", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: colors and font", pq3d: "2 rounds of revisions",
       pq4: "Streamer", "pq4-nota": "For streamers who go live several times a week.",
-      pq4a: "<b>25 clips</b> per week", pq4b: "Everything in Creator, plus:", pq4c: "Stream layout: gameplay on top, camera below",
-      pq4d: "Deliveries throughout the week",
-      "pq-extra": "Add-on services: posting the clips on your accounts (community management) and rush deliveries, each for a small extra fee.",
+      pq4a: "<b>25 clips</b> per week", pq4b: "Everything in Creator, plus:", pq4c: "Deliveries throughout the week",
+      "pq-extra": "Add-ons, for a small fee: posting the clips on your accounts and rush deliveries.",
+      "h-sobre": 'About <span class="hl">me</span>',
+      sobre1: "I'm Ariel, a vertical clip editor based in Bolivia. You work directly with me, no middlemen: the person who edits your videos is the one who answers you.",
+      sobre2: "Working from Bolivia lets me charge less than most editors without lowering the quality. That's why I start with 3 free sample clips: I'd rather you judge me by the results.",
       "h-faq": 'Frequently asked <span class="hl">questions</span>',
       "sub-faq": "If you have any other question, message me and I'll answer personally.",
       q1: "How long does delivery take?",
-      a1: "Between 1 and 4 days, depending on the length of the footage and the number of clips. If you have a deadline, let me know when you place the order and we'll plan around it.",
-      q2: "How many clips can you get from a stream?",
-      a2: "It depends on the content. As a reference, a stream longer than 2 hours gives me at least 5 clips. I only pick moments with real potential.",
-      q3: "Can I ask for changes?",
-      a3: "Yes. The Starter and Weekly packs include one round of revisions, and the Creator and Streamer packs include two.",
-      q4: "Who posts the clips?",
-      a4: "You do, on your own accounts: I deliver them ready to upload, with their caption and hashtags. If you'd rather I post them for you, I offer community management for a small extra fee.",
+      a1: "Between 1 and 4 days, depending on the length of the footage and the number of clips. If you have a deadline, let me know when you order and we'll plan around it.",
+      q2: "How many clips come out of a stream?",
+      a2: "It depends on the content. As a reference, a stream longer than 2 hours gives at least 5 clips. I only pick moments with real potential.",
       q5: "What do I need to send you?",
       a5: "Just the links to the videos or streams you want turned into clips. I take care of the rest.",
-      q6: "What format do I get the clips in?",
-      a6: "Vertical 1080 × 1920 MP4 video, ready for TikTok, Reels and Shorts, plus a cover image, caption and hashtags for each clip.",
+      q6: "How and in what format do I get the clips?",
+      a6: "Vertical 1080 × 1920 MP4 video, ready for TikTok, Reels and Shorts, with its cover image, caption and hashtags. I leave them in a Google Drive folder shared with you.",
+      q4: "Who posts the clips?",
+      a4: "You do, on your own accounts: I deliver them ready to upload. If you'd rather I post them, I can do it for a small extra fee.",
       q7: "Do you work with English content?",
       a7: "Yes. I edit content in Spanish and English, with captions in the language of the video.",
-      q8: "Do the sample clips cost anything?",
-      a8: "No. The 3 sample clips are free and with no commitment. If you like them, we'll talk about the package that suits you best.",
       q9: "How do I pay?",
-      a9: "In Bolivia, by QR payment. For any package, 50% is paid upfront and the remaining 50% once you receive the clips. If you're in another country, message me and we'll agree on a payment method.",
-      q10: "How do I receive the clips?",
-      a10: "In a Google Drive folder shared with you, where you can download them whenever you need.",
-      q11: "Can I choose the colors, font or caption style?",
-      a11: "Yes. You can send me your brand's colors, font and style; and if you like the look I usually use, I'll apply it as is. Whatever you prefer.",
-      q12: "Do you do rush deliveries?",
-      a12: "Yes, for a small extra fee. Let me know when you place the order and I'll prioritize your delivery.",
+      a9: "In Bolivia, by QR: 50% upfront and 50% when you receive the clips. If you're in another country, message me and we'll agree on a payment method.",
       q13: "Does my content stay private?",
-      a13: "Yes, if you want it to. Your content belongs to you: if I ever want to show one of your clips in my portfolio, I'll ask for your permission first.",
+      a13: "Yes. Your content belongs to you: if I ever want to show one of your clips in my portfolio, I'll ask for your permission first.",
+      "h-precio": 'Start with <span class="hl">3 free clips</span>',
+      precio: "Send me the link to your latest video on WhatsApp or by email and I'll send you the samples.",
+      "wa-boton": "Message me on WhatsApp",
       footer: "Ariel · Ragebaiter Clips",
-      copiado: "Copied!"
+      "aria-corte": "Compare before and after", "aria-sonido": "Turn sound on", "aria-sin-sonido": "Turn sound off"
     }
   };
   var es = {};
   document.querySelectorAll("[data-i18n]").forEach(function (el) { es[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll("[data-i18n-html]").forEach(function (el) { es[el.dataset.i18nHtml] = el.innerHTML; });
   es.copiado = "¡Copiado!";
+  es["aria-corte"] = "Comparar antes y después"; es["aria-sonido"] = "Activar sonido"; es["aria-sin-sonido"] = "Quitar sonido";
   textos.es = es;
   var actual = "es";
 
@@ -589,7 +561,11 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     document.querySelectorAll("[data-i18n]").forEach(function (el) { if (t[el.dataset.i18n]) el.textContent = t[el.dataset.i18n]; });
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) { if (t[el.dataset.i18nHtml]) el.innerHTML = t[el.dataset.i18nHtml]; });
     document.querySelectorAll(".idioma button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+    document.getElementById("corte").setAttribute("aria-label", t["aria-corte"]);
+    marcarSonido();
     actualizarWhatsApp(lang);
+    // los titulares nuevos (el otro idioma) salen ya pintados donde ya se vieron
+    document.querySelectorAll(".visto .hl, .hero .hl").forEach(function (h) { if (inicio) h.classList.add("pintado"); });
     try { localStorage.setItem("idioma", lang); } catch (e) {}
   }
 
@@ -602,63 +578,130 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     var url = "https://wa.me/59175027789?text=" + encodeURIComponent(MENSAJE_WA[lang] || MENSAJE_WA.es);
     document.querySelectorAll("a.wa").forEach(function (a) { a.href = url; });
   }
-  actualizarWhatsApp("es");
-
-  // Idioma: #en / #es en el link manda; si no, lo que eligio antes; si no, el idioma del navegador
-  var inicial = location.hash === "#en" ? "en" : location.hash === "#es" ? "es" : null;
-  if (!inicial) { try { inicial = localStorage.getItem("idioma"); } catch (e) {} }
-  if (!inicial) { inicial = (navigator.language || "es").toLowerCase().indexOf("es") === 0 ? "es" : "en"; }
-  if (inicial === "en") aplicar("en");
-
-  document.querySelectorAll(".idioma button").forEach(function (b) {
-    b.addEventListener("click", function () { aplicar(b.dataset.lang); });
-  });
 
   function copiar(boton) {
     var mail = "ragebaiterclipper@gmail.com";
     var listo = function () {
-      var antes = boton.textContent;
       boton.textContent = textos[actual].copiado;
-      setTimeout(function () { boton.textContent = antes; }, 1600);
+      setTimeout(function () { boton.textContent = textos[actual].copiar; }, 1600);
     };
     var seleccionar = function () {
       var r = document.createRange(); r.selectNodeContents(document.getElementById("mail"));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
     };
-    try {
-      navigator.clipboard.writeText(mail).then(listo, seleccionar);
-    } catch (e) { seleccionar(); }
+    try { navigator.clipboard.writeText(mail).then(listo, seleccionar); } catch (e) { seleccionar(); }
   }
   document.getElementById("copiar").addEventListener("click", function () { copiar(this); });
   document.getElementById("copiar2").addEventListener("click", function () { copiar(this); });
 
-  // Luces: el color principal de cada video (sacado de su portada) tine un resplandor suave en la pagina
-  var aura = document.querySelector(".aura");
-  function colorPrincipal(img) {
-    try {
-      var c = document.createElement("canvas"); c.width = c.height = 24;
-      var g = c.getContext("2d"); g.drawImage(img, 0, 0, 24, 24);
-      var d = g.getImageData(0, 0, 24, 24).data, bins = [];
-      for (var i = 0; i < d.length; i += 4) {
-        var R = d[i] / 255, G = d[i + 1] / 255, B = d[i + 2] / 255;
-        var mx = Math.max(R, G, B), mn = Math.min(R, G, B), s = mx ? (mx - mn) / mx : 0;
-        if (s < 0.3 || mx < 0.3) continue;            // solo colores vivos: fuera grises, blancos y negros
-        var h = mx === mn ? 0 : mx === R ? ((G - B) / (mx - mn) + 6) % 6 : mx === G ? (B - R) / (mx - mn) + 2 : (R - G) / (mx - mn) + 4;
-        var k = Math.floor(h * 2) % 12;               // 12 familias de color de 30 grados
-        var peso = s * mx;
-        if (h * 60 >= 5 && h * 60 <= 45 && s < 0.7) peso *= 0.25;   // tonos de piel: las caras no deciden el color
-        bins[k] = bins[k] || {w: 0, h: 0};
-        bins[k].w += peso; bins[k].h += h * 60 * peso;
-      }
-      var mejor = null;
-      bins.forEach(function (x) { if (x && (!mejor || x.w > mejor.w)) mejor = x; });
-      if (!mejor || mejor.w < 2) return null;
-      // El color que mas predomina, vivo y luminoso (saturacion 85%, luz 55%)
-      var hue = mejor.h / mejor.w, sat = 0.85, luz = 0.55;
-      var f = function (n) { var kk = (n + hue / 30) % 12; return luz - sat * Math.min(luz, 1 - luz) * Math.max(-1, Math.min(kk - 3, 9 - kk, 1)); };
-      return [f(0), f(8), f(4)].map(function (x) { return Math.round(x * 255); }).join(" ");
-    } catch (e) { return null; }
+  // ---- Videos ----
+  // Los ejemplos se reproducen solos (sin sonido) cuando se ven y se pausan al salir de la pantalla: el cliente ve el
+  // trabajo sin tocar nada y no se gastan datos en videos que no mira. Con sonido, suena uno solo a la vez.
+  var cmp = document.getElementById("comparar");
+  var vAntes = cmp.querySelector(".c-antes"), vDespues = cmp.querySelector(".c-despues");
+  var botonSonido = document.getElementById("c-sonido");
+  var todos = Array.prototype.slice.call(document.querySelectorAll("video")).filter(function (v) { return v !== vAntes; });
+  var pausaMia = new WeakSet();          // pausas hechas por la pagina (no por el visitante)
+  var pausaUsuario = new WeakSet();      // el visitante lo pauso: no se vuelve a reproducir solo
+
+  function callar(excepto) {
+    todos.forEach(function (o) { if (o !== excepto && !o.muted) { o.muted = true; } });
+    marcarSonido();
   }
+  todos.forEach(function (v) {
+    v.addEventListener("volumechange", function () { if (!v.muted && !v.paused) callar(v); });
+    v.addEventListener("play", function () { pausaUsuario.delete(v); if (!v.muted) callar(v); });
+    v.addEventListener("pause", function () {
+      // solo cuenta como pausa del visitante si viene de un toque/tecla (el navegador tambien pausa solo, p. ej.
+      // con la pestana oculta, y ese video tiene que volver a reproducirse)
+      if (pausaMia.has(v)) pausaMia.delete(v); else if (!v.ended && Date.now() - ultimoGesto < 1000) pausaUsuario.add(v);
+    });
+  });
+  var ultimoGesto = 0;
+  ["pointerdown", "keydown"].forEach(function (ev) {
+    document.addEventListener(ev, function () { ultimoGesto = Date.now(); }, true);
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState !== "visible") return;
+    todos.forEach(function (v) {         // al volver a la pestana, siguen los que estan en pantalla
+      var r = v.getBoundingClientRect();
+      if (v.paused && !pausaUsuario.has(v) && r.bottom > 0 && r.top < innerHeight) v.play().catch(function () {});
+    });
+  });
+  if ("IntersectionObserver" in window) {
+    var mirar = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        var v = e.target === cmp ? vDespues : e.target;
+        if (e.isIntersecting) {
+          if (v.paused && !pausaUsuario.has(v)) { if (v.preload === "none") v.preload = "auto"; v.play().catch(function () {}); }
+        } else if (!v.paused) { pausaMia.add(v); v.pause(); }
+      });
+    }, { threshold: 0.6 });
+    // el clip del comparador se mide con su marco (con la barra, el navegador lo ve "medio tapado")
+    todos.forEach(function (v) { mirar.observe(v === vDespues ? cmp : v); });
+  }
+
+  // ---- Antes y despues: el original y el clip van sincronizados; la barra elige cuanto se ve de cada uno ----
+  vDespues.addEventListener("play", function () { sincronizar(true); });
+  vDespues.addEventListener("pause", function () { vAntes.pause(); });
+  vDespues.addEventListener("timeupdate", function () { sincronizar(false); });
+  function sincronizar(forzar) {
+    var t = vDespues.currentTime;
+    if (vDespues.paused) return;
+    if (!vAntes.duration) { if (vAntes.preload === "none") { vAntes.preload = "auto"; vAntes.load(); } return; }
+    if (t >= vAntes.duration - 0.05) { if (!vAntes.paused) vAntes.pause(); return; }   // el clip sigue con la placa final
+    if (vAntes.paused) { vAntes.preload = "auto"; vAntes.currentTime = t; vAntes.play().catch(function () {}); }
+    else if (forzar || Math.abs(vAntes.currentTime - t) > 0.2) vAntes.currentTime = t;
+  }
+  vAntes.addEventListener("loadedmetadata", function () { sincronizar(true); });
+  var rango = document.getElementById("corte");
+  function poner(p) { p = Math.max(0, Math.min(100, p)); cmp.style.setProperty("--corte", p + "%"); rango.value = Math.round(p); }
+  var arrastrando = false;
+  function desdePuntero(e) { var r = cmp.getBoundingClientRect(); poner((e.clientX - r.left) / r.width * 100); }
+  cmp.addEventListener("pointerdown", function (e) {
+    if (e.target.closest(".c-sonido")) return;
+    arrastrando = true; cmp.setPointerCapture(e.pointerId); desdePuntero(e); guiar = false;
+  });
+  cmp.addEventListener("pointermove", function (e) { if (arrastrando) desdePuntero(e); });
+  cmp.addEventListener("pointerup", function () { arrastrando = false; });
+  cmp.addEventListener("pointercancel", function () { arrastrando = false; });
+  rango.addEventListener("input", function () { poner(+rango.value); guiar = false; });
+  cmp.addEventListener("keydown", function (e) {
+    if (e.target === botonSonido) return;
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); poner(+rango.value + (e.key === "ArrowLeft" ? -5 : 5)); }
+  });
+  cmp.tabIndex = 0;
+  function marcarSonido() {
+    var t = textos[actual] || textos.es, con = !vDespues.muted;
+    botonSonido.setAttribute("aria-pressed", String(con));
+    botonSonido.setAttribute("aria-label", con ? t["aria-sin-sonido"] : t["aria-sonido"]);
+    botonSonido.querySelector(".c-onda").hidden = !con;
+    botonSonido.querySelector(".c-mudo").hidden = con;
+  }
+  botonSonido.addEventListener("click", function () {
+    vDespues.muted = !vDespues.muted;
+    if (vDespues.paused) { pausaUsuario.delete(vDespues); vDespues.play().catch(function () {}); }
+    if (!vDespues.muted) callar(vDespues);
+    marcarSonido();
+  });
+  // La primera vez que se ve, la barra se corre sola un poco a cada lado: se entiende que se puede arrastrar
+  var guiar = mov;
+  function mostrarBarra() {
+    if (!guiar) return;
+    var t0 = null;
+    function paso(ts) {
+      if (!guiar) return;
+      t0 = t0 || ts;
+      var s = (ts - t0) / 1000;
+      if (s > 2.4) { poner(50); return; }
+      poner(50 + Math.sin(s / 2.4 * Math.PI * 2) * 22 * (1 - s / 2.4 * 0.3));
+      requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+
+  // ---- Luces: el color de cada video tine un resplandor suave mientras suena ----
+  var aura = document.querySelector(".aura");
   function encender(caja) {
     var rect = caja.getBoundingClientRect();
     aura.style.setProperty("--aura", caja.style.getPropertyValue("--c") || "255 214 10");
@@ -667,29 +710,80 @@ footer { color: var(--muted); font-size: var(--step--1); padding-top: 28px; }
     aura.classList.add("encendida");
   }
   function apagar() { aura.classList.remove("encendida"); }
-  document.querySelectorAll("video").forEach(function (v) {
-    var caja = v.closest(".tel, .horizontal");
+  todos.forEach(function (v) {
+    var caja = v.closest(".tel");
     if (!caja) return;
     caja.classList.add("con-luz");
-    // El color de cada video = el del resaltado de su titulo (lo eligio el clipper segun la escena);
-    // la deteccion automatica queda para videos nuevos sin data-luz
     if (v.dataset.luz) caja.style.setProperty("--c", v.dataset.luz);
-    else if (v.poster) {
-      var img = new Image();
-      img.onload = function () { var col = colorPrincipal(img); if (col) caja.style.setProperty("--c", col); };
-      img.src = v.poster;
-    }
     caja.addEventListener("mouseenter", function () { encender(caja); });
     caja.addEventListener("mouseleave", function () { if (!caja.classList.contains("sonando")) apagar(); });
-    v.addEventListener("play", function () { if (!v.muted) { caja.classList.add("sonando"); encender(caja); } });
-    v.addEventListener("pause", function () { caja.classList.remove("sonando"); apagar(); });
-    v.addEventListener("ended", function () { caja.classList.remove("sonando"); apagar(); });
+    var revisar = function () {
+      var suena = !v.paused && !v.muted;
+      caja.classList.toggle("sonando", suena);
+      if (suena) encender(caja); else if (!caja.matches(":hover")) apagar();
+    };
+    v.addEventListener("play", revisar); v.addEventListener("pause", revisar);
+    v.addEventListener("volumechange", revisar); v.addEventListener("ended", revisar);
   });
 
-  // Solo un video suena a la vez
-  var videos = document.querySelectorAll("video[controls]");
-  videos.forEach(function (v) {
-    v.addEventListener("play", function () { videos.forEach(function (o) { if (o !== v) o.pause(); }); });
+  // ---- Preguntas frecuentes: se abren y cierran suave ----
+  document.querySelectorAll(".faq details").forEach(function (d) {
+    var p = d.querySelector("p");
+    d.querySelector("summary").addEventListener("click", function (e) {
+      if (!mov || !p.animate) return;
+      e.preventDefault();
+      if (d.open) {
+        var a = p.animate([{ height: p.offsetHeight + "px", marginTop: "10px", opacity: 1 }, { height: "0px", marginTop: "0px", opacity: 0 }],
+                          { duration: 220, easing: "ease-in" });
+        a.onfinish = function () { d.open = false; };
+      } else {
+        d.open = true;
+        p.animate([{ height: "0px", marginTop: "0px", opacity: 0 }, { height: p.offsetHeight + "px", marginTop: "10px", opacity: 1 }],
+                  { duration: 320, easing: "cubic-bezier(.16, 1, .3, 1)" });
+      }
+    });
+  });
+
+  // ---- Secciones que aparecen y titulares que se pintan ----
+  var inicio = false;
+  function verSeccion(s) {
+    s.classList.add("visto");
+    s.querySelectorAll(".hl").forEach(function (h) { h.classList.add("pintado"); });
+    if (s.contains(cmp)) setTimeout(mostrarBarra, 700);
+  }
+  var secciones = document.querySelectorAll(".revelar");
+  if (mov && "IntersectionObserver" in window) {
+    var aparecer = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { if (e.isIntersecting) { verSeccion(e.target); aparecer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    secciones.forEach(function (s) { aparecer.observe(s); });
+    // el paquete recomendado brilla cuando ESA tarjeta aparece (en el celular queda mas abajo que el titulo)
+    var destacado = document.querySelector(".destacado");
+    var brillar = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); brillar.disconnect(); } });
+    }, { threshold: 0.6 });
+    brillar.observe(destacado);
+    setTimeout(function () { document.querySelectorAll(".hero .hl").forEach(function (h) { h.classList.add("pintado"); }); }, 250);
+    // WhatsApp: un latido a los 10 s (una sola vez)
+    setTimeout(function () {
+      var w = document.querySelector(".wa-flotante");
+      w.classList.add("llama");
+      w.addEventListener("animationend", function () { w.classList.remove("llama"); }, { once: true });
+    }, 10000);
+  } else {
+    secciones.forEach(verSeccion);
+  }
+
+  // Idioma: #en / #es en el link manda; si no, lo que eligio antes; si no, el idioma del navegador
+  actualizarWhatsApp("es");
+  marcarSonido();
+  var inicial = location.hash === "#en" ? "en" : location.hash === "#es" ? "es" : null;
+  if (!inicial) { try { inicial = localStorage.getItem("idioma"); } catch (e) {} }
+  if (!inicial) { inicial = (navigator.language || "es").toLowerCase().indexOf("es") === 0 ? "es" : "en"; }
+  if (inicial === "en") aplicar("en");
+  inicio = true;
+  document.querySelectorAll(".idioma button").forEach(function (b) {
+    b.addEventListener("click", function () { aplicar(b.dataset.lang); });
   });
 })();
 </script>
