@@ -13,6 +13,7 @@
 <meta property="og:description" content="Clips verticales para TikTok, Reels y Shorts a partir de tus streams y podcasts. 3 clips de muestra gratis.">
 <meta property="og:image" content="https://ragebaiterclipper.github.io/icono-512.png">
 <meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#111215">
 <title>Ragebaiter Clips</title>
 <script>
   // Animaciones solo si el visitante no las desactivo en su dispositivo (y con JavaScript: sin JS todo se ve quieto)
@@ -267,26 +268,150 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
   .aura, .tel, .btn, .copiar, .paquete, .wa-flotante, .faq summary::after { transition: none; }
   .btn:hover, .wa-flotante:hover { transform: none; }
 }
+
+/* ================= Pulido profesional (misma estetica: amarillo de subtitulo, Montserrat + Manrope) ================= */
+:root { --step-2: clamp(1.75rem, 3.4vw, 2.35rem); --radius: 16px; --sombra: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -28px rgb(0 0 0 / 0.45); }
+html { scroll-padding-top: 84px; }
+html, body { overflow-x: clip; }
+html.anim { scroll-behavior: smooth; }
+::selection { background: var(--caption); color: var(--caption-ink); }
+body { background:
+  radial-gradient(900px 520px at 85% -8%, rgb(255 214 10 / 0.10), transparent 62%),
+  radial-gradient(700px 480px at -10% 30%, rgb(255 214 10 / 0.04), transparent 60%), var(--bg); background-repeat: no-repeat; }
+h1 { letter-spacing: -0.025em; line-height: 1.06; }
+h2 { letter-spacing: -0.02em; }
+section { padding-block: clamp(48px, 7vw, 76px); border-top-color: color-mix(in srgb, var(--line) 65%, transparent); }
+.sub { font-size: 1.05rem; }
+
+/* Barra de arriba fija, con vidrio */
+.top { position: sticky; top: 0; z-index: 20; padding-block: 14px; }
+.top::before { content: ""; position: absolute; inset: 0 -100vmax; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.marca { text-decoration: none; white-space: nowrap; }
+.menu { display: flex; gap: 26px; margin-left: auto; margin-right: 8px; }
+.menu a { text-decoration: none; font-weight: 500; font-size: var(--step--1); color: var(--muted); transition: color .2s ease; }
+.menu a:hover { color: var(--ink); }
+.top-der { display: flex; align-items: center; gap: 12px; }
+.btn-top { font-size: var(--step--1); padding: 8px 16px; background: var(--caption); color: var(--caption-ink); border-color: var(--caption); }
+
+/* Portada */
+.hero { padding-block: clamp(28px, 6vw, 64px) clamp(48px, 7vw, 80px); }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; font-size: var(--step--1); font-weight: 700; color: var(--muted);
+  border: 1px solid var(--line); background: var(--surface); padding: 5px 14px 5px 10px; border-radius: 999px; }
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--caption); box-shadow: 0 0 0 4px rgb(255 214 10 / 0.18); }
+.lead { max-width: 38ch; }
+.oferta { border-radius: 20px; padding: 22px 24px; }
+.confianza { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; padding: 0; margin: 22px 0 0; font-size: var(--step--1); color: var(--muted); }
+.confianza li { display: inline-flex; align-items: center; gap: 7px; }
+.confianza li::before { content: ""; width: 16px; height: 16px; flex: none; border-radius: 50%; background: var(--caption);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 100% no-repeat; }
+.hero-clip { position: relative; }
+.hero-clip::before { content: ""; position: absolute; inset: 8% -18%; z-index: -1; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(255 214 10 / 0.28), transparent); filter: blur(30px); }
+
+/* Telefonos: marco mas fino y realista, con sombra */
+.tel { border: 7px solid #0b0b0d; border-radius: 30px;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.10), 0 0 0 1px rgb(0 0 0 / 0.25), 0 30px 60px -30px rgb(0 0 0 / 0.6); }
+.con-luz:hover, .con-luz.sonando, .con-luz:focus-within { box-shadow: 0 0 0 1px rgb(255 255 255 / 0.12), 0 0 52px -6px rgb(var(--c, 255 214 10) / var(--brillo-alfa)); }
+.clip .tel { transition: box-shadow .6s ease, transform .5s var(--suave); }
+.clip .tel:hover { transform: translateY(-4px); }
+.clip figcaption { margin-top: 16px; }
+.clip figcaption span { display: inline-flex; align-self: start; justify-self: start; margin-top: 4px; font-size: 0.78rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+
+/* Que lleva cada clip: tarjetas con icono */
+.incluye { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.incluye li { display: grid; gap: 4px; align-content: start; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--sombra); transition: border-color .3s ease, transform .4s var(--suave); }
+.incluye li:hover { border-color: rgb(255 214 10 / 0.55); transform: translateY(-2px); }
+.incluye li b { font-family: var(--font-display); font-size: 1.02rem; }
+.ico { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 10px; border-radius: 12px;
+  background: rgb(255 214 10 / 0.14); color: #c9a400; border: 1px solid rgb(255 214 10 / 0.35); }
+:root[data-theme="dark"] .ico { color: var(--caption); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ico { color: var(--caption); } }
+.ico svg { width: 22px; height: 22px; }
+
+/* Calidad */
+.ficha { border-radius: var(--radius); padding: 6px 22px; box-shadow: var(--sombra); }
+.ficha div { padding-block: 14px; }
+.ficha dd { font-weight: 700; }
+
+/* Pasos: tarjetas numeradas */
+.pasos { gap: 14px; }
+.pasos li { position: relative; padding: 24px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--sombra); }
+.pasos li::before { width: 38px; height: 38px; border-radius: 10px; margin-bottom: 14px; }
+.pasos b { font-size: 1.05rem; }
+
+/* Paquetes */
+.paquetes { gap: 18px; align-items: stretch; }
+.paquete { border-radius: 20px; padding: 26px 24px; box-shadow: var(--sombra); }
+.paquete.destacado { box-shadow: 0 0 0 1px var(--caption), 0 24px 60px -24px rgb(255 214 10 / 0.35); }
+.paquete ul { list-style: none; padding: 0; gap: 9px; border-top: 1px solid var(--line); padding-top: 16px; }
+.paquete li { position: relative; padding-left: 26px; }
+.paquete li::before { content: ""; position: absolute; left: 0; top: 0.32em; width: 16px; height: 16px; background: var(--caption);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 100% no-repeat; }
+:root:not([data-theme="dark"]) .paquete li::before { background: #c9a400; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .paquete li::before { background: var(--caption); } }
+.precio .monto { font-size: 2.8rem; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.precios { border-radius: 20px; padding: 24px 28px; box-shadow: var(--sombra); }
+
+/* Sobre mi */
+.sobre img { box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--caption), 0 20px 40px -20px rgb(0 0 0 / 0.5); }
+
+/* Preguntas */
+.faq details { border-radius: 14px; padding: 16px 20px; transition: border-color .3s ease; }
+.faq details:hover, .faq details[open] { border-color: rgb(255 214 10 / 0.5); }
+.faq summary::after { color: var(--ink); }
+
+/* Cierre: tarjeta grande centrada */
+.cierre { border-top: 0; justify-items: center; text-align: center; margin-top: 12px; padding: clamp(40px, 7vw, 72px) clamp(20px, 5vw, 48px);
+  border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--sombra);
+  background: radial-gradient(600px 300px at 50% 0%, rgb(255 214 10 / 0.16), transparent 70%), var(--surface); }
+.cierre h2 { font-size: clamp(2rem, 5vw, 3rem); }
+.cierre .botones, .cierre .email { justify-content: center; }
+.cierre .btn-wa { padding: 14px 26px; font-size: 1.05rem; }
+
+/* Pie */
+.pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding-top: 36px; }
+.pie p { margin: 0; }
+
+@media (max-width: 860px) { .menu { display: none; } .incluye { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .pasos, .incluye { grid-template-columns: 1fr; } .eyebrow { font-size: 0.8rem; } }
+@media (max-width: 520px) { .btn-top { display: none; } .pie { justify-content: center; text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .clip .tel, .incluye li { transition: none; } .clip .tel:hover, .incluye li:hover { transform: none; } }
 </style>
 </head>
 <body>
 <div class="aura" aria-hidden="true"></div>
 <div class="wrap">
   <header class="top">
-    <div class="marca">Ragebaiter <span>Clips</span></div>
-    <div class="idioma" role="group" aria-label="Idioma / Language">
-      <button type="button" id="btn-es" data-lang="es" aria-pressed="true">ES</button>
-      <button type="button" id="btn-en" data-lang="en" aria-pressed="false">EN</button>
+    <a class="marca" href="#">Ragebaiter <span>Clips</span></a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#t-ejemplos" data-i18n="m1">Ejemplos</a>
+      <a href="#t-pasos" data-i18n="m2">Cómo funciona</a>
+      <a href="#t-paquetes" data-i18n="m3">Paquetes</a>
+      <a href="#t-faq" data-i18n="m4">Preguntas</a>
+    </nav>
+    <div class="top-der">
+      <div class="idioma" role="group" aria-label="Idioma / Language">
+        <button type="button" id="btn-es" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" id="btn-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-top wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="top-cta">Muestra gratis</a>
     </div>
   </header>
 
   <div class="hero">
     <div>
+      <p class="eyebrow" data-i18n="eyebrow">Editor de clips para TikTok, Reels y Shorts</p>
       <h1 data-i18n-html="h1">Tú grabas. Yo hago que <span class="hl">te vean.</span></h1>
-      <p class="lead" data-i18n="lead">Soy Ariel. Edito clips verticales para TikTok, Reels y Shorts a partir de tus directos, podcasts y videos largos.</p>
+      <p class="lead" data-i18n="lead">Soy Ariel. Convierto tus directos, podcasts y videos largos en clips verticales que enganchan desde el primer segundo.</p>
       <div class="oferta">
         <strong data-i18n-html="oferta">Te hago <span class="gratis">3 clips gratis</span> de muestra con tu último video.</strong>
-        <span data-i18n="oferta2">Sin compromiso: si te gustan, lo conversamos :)</span>
+        <span data-i18n="oferta2">Sin compromiso y sin pagar nada: si te gustan, lo conversamos.</span>
         <div class="botones">
           <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
@@ -299,6 +424,11 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
           <button type="button" class="copiar" id="copiar" data-i18n="copiar">Copiar</button>
         </div>
       </div>
+      <ul class="confianza">
+        <li data-i18n="t1">Entrega en 1 a 4 días</li>
+        <li data-i18n="t2">1080 × 1920, hasta 60 fps</li>
+        <li data-i18n="t3">Español e inglés</li>
+      </ul>
     </div>
     <div class="hero-clip">
       <div class="tel">
@@ -351,12 +481,12 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     <h2 id="t-incluye" data-i18n-html="h-incluye">Qué lleva <span class="hl">cada clip</span></h2>
     <p class="sub" data-i18n="sub-incluye">Lo que ves en los ejemplos, aplicado a tu contenido.</p>
     <ul class="incluye">
-      <li><b data-i18n="f1">Subtítulos animados</b><small data-i18n="f1d">Palabra por palabra, con las palabras clave resaltadas.</small></li>
-      <li><b data-i18n="f2">Título gancho</b><small data-i18n="f2d">Una frase al inicio que hace que se queden a mirar.</small></li>
-      <li><b data-i18n="f3">Zooms en el momento fuerte</b><small data-i18n="f3d">Van a la cara de quien habla, con sonido de impacto.</small></li>
-      <li><b data-i18n="f4">Formato para streams</b><small data-i18n="f4d">El juego arriba y tu cámara abajo, sin recortar.</small></li>
-      <li><b data-i18n="f5">Podcasts con varias personas</b><small data-i18n="f5d">La cámara sigue a quien está hablando.</small></li>
-      <li><b data-i18n="f6">Listo para publicar</b><small data-i18n="f6d">Con portada, descripción y hashtags.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 15h4M14 15h3M7 11h10"/></svg></span><b data-i18n="f1">Subtítulos animados</b><small data-i18n="f1d">Palabra por palabra, con las palabras clave resaltadas.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7V5h14v2M12 5v14M9 19h6"/></svg></span><b data-i18n="f2">Título gancho</b><small data-i18n="f2d">Una frase al inicio que hace que se queden a mirar.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span><b data-i18n="f3">Zooms en el momento fuerte</b><small data-i18n="f3d">Van a la cara de quien habla, con sonido de impacto.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M6 12h12"/></svg></span><b data-i18n="f4">Formato para streams</b><small data-i18n="f4d">El juego arriba y tu cámara abajo, sin recortar.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5 4.8"/></svg></span><b data-i18n="f5">Podcasts con varias personas</b><small data-i18n="f5d">La cámara sigue a quien está hablando.</small></li>
+      <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg></span><b data-i18n="f6">Listo para publicar</b><small data-i18n="f6d">Con portada, descripción y hashtags.</small></li>
     </ul>
   </section>
 
@@ -479,7 +609,7 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
 
   <section class="cierre revelar" aria-labelledby="t-precio">
     <h2 id="t-precio" data-i18n-html="h-precio">Empieza con <span class="hl gratis">3 clips gratis</span></h2>
-    <p data-i18n="precio">Mándame el link de tu último video por WhatsApp o por correo y te envío la muestra.</p>
+    <p data-i18n="precio">Mándame el link de tu último video por WhatsApp o por correo y en pocos días tienes tu muestra. Sin compromiso.</p>
     <div class="botones">
       <a class="btn btn-wa wa" href="https://wa.me/59175027789" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
@@ -491,8 +621,12 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       <code>ragebaiterclipper@gmail.com</code>
       <button type="button" class="copiar" id="copiar2" data-i18n="copiar">Copiar</button>
     </div>
-    <footer data-i18n="footer">Ariel · Ragebaiter Clips</footer>
   </section>
+  <footer class="pie">
+    <a class="marca" href="#">Ragebaiter <span>Clips</span></a>
+    <p data-i18n="footer">Clips verticales para creadores · Hecho por Ariel desde Bolivia</p>
+    <span>© 2026</span>
+  </footer>
 </div>
 
 <a class="wa-flotante wa" href="https://wa.me/59175027789" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -505,9 +639,12 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
   var textos = {
     en: {
       h1: 'You hit record. I make sure <span class="hl">you get seen.</span>',
-      lead: "I'm Ariel. I edit vertical clips for TikTok, Reels and Shorts from your streams, podcasts and long videos.",
+      lead: "I'm Ariel. I turn your streams, podcasts and long videos into vertical clips that hook viewers from the very first second.",
+      eyebrow: "Clip editor for TikTok, Reels and Shorts",
+      m1: "Examples", m2: "How it works", m3: "Packages", m4: "FAQ", "top-cta": "Free sample",
+      t1: "Delivered in 1 to 4 days", t2: "1080 × 1920, up to 60 fps", t3: "Spanish and English",
       oferta: "I'll make you <span class=\"gratis\">3 free clips</span> as samples from your latest video.",
-      oferta2: "No strings attached: if you like them, we'll talk :)",
+      oferta2: "No strings attached and nothing to pay: if you like them, we'll talk.",
       "o-correo": "or by email:", copiar: "Copy", copiado: "Copied!",
       "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
       "sub-ejemplos": "Full clips, ready to post. Turn the sound on to watch them like on a phone.",
@@ -570,9 +707,9 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       q13: "Does my content stay private?",
       a13: "Yes. Your content belongs to you: if I ever want to show one of your clips in my portfolio, I'll ask for your permission first.",
       "h-precio": 'Start with <span class="hl gratis">3 free clips</span>',
-      precio: "Send me the link to your latest video on WhatsApp or by email and I'll send you the samples.",
+      precio: "Send me the link to your latest video on WhatsApp or by email and you'll have your samples in a few days. No strings attached.",
       "wa-boton": "Message me on WhatsApp",
-      footer: "Ariel · Ragebaiter Clips",
+      footer: "Vertical clips for creators · Made by Ariel from Bolivia",
       "aria-corte": "Compare before and after", "aria-sonido": "Turn sound on", "aria-sin-sonido": "Turn sound off"
     }
   };
