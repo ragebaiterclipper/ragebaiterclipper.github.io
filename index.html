@@ -161,13 +161,23 @@ figure { margin: 0; }
 .wa-flotante svg { width: 30px; height: 30px; }
 
 /* Paquetes */
-.paquetes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.paquetes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 1000px; }
 .paquete { position: relative; display: grid; gap: 12px; align-content: start; background: var(--surface); border: 1px solid var(--line);
            border-radius: var(--radius); padding: 22px 20px; min-width: 0; }
 .paquete.destacado { border: 2px solid var(--caption); }
 .paquete h3 { font: 900 var(--step-1) var(--font-display); margin: 0; }
 .paquete ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
-.paquete .btn { justify-self: start; font-size: var(--step--1); padding: 8px 16px; }
+.paquete .btn { justify-self: stretch; justify-content: center; text-align: center; font-size: var(--step--1); padding: 10px 16px; margin-top: 4px; }
+.precio { display: flex; align-items: baseline; gap: 6px; }
+.precio .monto { font: 900 2.4rem/1 var(--font-display); }
+.precio .per { font-size: var(--step--1); color: var(--muted); }
+.por-clip { margin: -6px 0 0; font-size: var(--step--1); color: var(--muted); }
+.por-clip b { background: var(--caption); color: var(--caption-ink); padding: 1px 7px; border-radius: 5px; }
+.paquete { display: flex; flex-direction: column; }
+.paquete > .sello { align-self: flex-start; }
+.paquete .btn { margin-top: auto; }
+.paquete.destacado .btn { background: var(--caption); color: var(--caption-ink); border-color: var(--caption); }
+.paquete.destacado { box-shadow: 0 12px 40px rgb(0 0 0 / 0.35); }
 .sello { justify-self: start; font: 700 0.72rem var(--font-body); letter-spacing: 0.06em; text-transform: uppercase;
          background: var(--caption); color: var(--caption-ink); padding: 3px 10px; border-radius: 6px; }
 .nota { margin: 0; font-size: var(--step--1); color: var(--muted); }
@@ -379,49 +389,51 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     <div class="paquetes">
       <div class="paquete">
         <h3 data-i18n="pq1">Inicial</h3>
-        <p class="nota" data-i18n="pq1-nota">Para conocer mi trabajo: hasta 2 semanas.</p>
+        <p class="nota" data-i18n="pq1-nota">Para probar cómo crece tu cuenta con clips: hasta 2 semanas.</p>
+        <div class="precio"><span class="monto">$45</span><span class="per" data-i18n="pq-per">USD / semana</span></div>
+        <p class="por-clip" data-i18n-html="pq1-clip">Solo <b>$9 por clip</b></p>
         <ul>
-          <li data-i18n-html="pq1a"><b>7 clips</b> por semana</li>
-          <li data-i18n="pq1c">Entrega en un solo envío</li>
+          <li data-i18n-html="pq1a"><b>5 clips</b> por semana</li>
+          <li data-i18n="pq1b">Subtítulos, título y formato vertical listos para subir</li>
+          <li data-i18n="pq1c">Texto para publicar en cada clip</li>
+          <li data-i18n="pq1e">Entrega en un solo envío</li>
           <li data-i18n="pq1d">1 ronda de cambios</li>
         </ul>
+        <a class="btn btn-correo wa-paquete" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Quiero este paquete</a>
       </div>
       <div class="paquete destacado">
         <span class="sello" data-i18n="sello">Recomendado</span>
         <h3 data-i18n="pq2">Semanal</h3>
-        <p class="nota" data-i18n="pq2-nota">El equilibrio entre cantidad y constancia.</p>
+        <p class="nota" data-i18n="pq2-nota">El doble de clips por solo $20 más: más de 1 clip para cada día.</p>
+        <div class="precio"><span class="monto">$65</span><span class="per" data-i18n="pq-per">USD / semana</span></div>
+        <p class="por-clip" data-i18n-html="pq2-clip"><b>$6.50 por clip</b> · ahorras 28%</p>
         <ul>
           <li data-i18n-html="pq2a"><b>10 clips</b> por semana</li>
           <li data-i18n="pq2b">Todo lo del Inicial, y además:</li>
           <li data-i18n="pq2c">Subtítulos con los colores de tu marca</li>
           <li data-i18n="pq2d">Entrega en 2 tandas por semana</li>
         </ul>
+        <a class="btn btn-correo wa-paquete" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Quiero este paquete</a>
       </div>
       <div class="paquete">
         <h3 data-i18n="pq3">Creador</h3>
-        <p class="nota" data-i18n="pq3-nota">Para quienes publican todos los días.</p>
+        <p class="nota" data-i18n="pq3-nota">Para quienes quieren crecer rápido y publicar todos los días.</p>
+        <div class="precio"><span class="monto">$95</span><span class="per" data-i18n="pq-per">USD / semana</span></div>
+        <p class="por-clip" data-i18n-html="pq3-clip"><b>$6.33 por clip</b> · el precio más bajo</p>
         <ul>
-          <li data-i18n-html="pq3a"><b>15 clips</b> por semana</li>
+          <li data-i18n-html="pq3a"><b>15 clips</b> por semana: 2 por día</li>
           <li data-i18n="pq3b">Todo lo del Semanal, y además:</li>
           <li data-i18n="pq3c">Tu propio estilo: colores y tipografía</li>
           <li data-i18n="pq3d">2 rondas de cambios</li>
         </ul>
-      </div>
-      <div class="paquete">
-        <h3 data-i18n="pq4">Streamer</h3>
-        <p class="nota" data-i18n="pq4-nota">Para quienes transmiten varias veces por semana.</p>
-        <ul>
-          <li data-i18n-html="pq4a"><b>25 clips</b> por semana</li>
-          <li data-i18n="pq4b">Todo lo del Creador, y además:</li>
-          <li data-i18n="pq4c">Entregas a lo largo de la semana</li>
-        </ul>
+        <a class="btn btn-correo wa-paquete" href="https://wa.me/59175027789" target="_blank" rel="noopener" data-i18n="pq-boton">Quiero este paquete</a>
       </div>
     </div>
-    <p class="extra" data-i18n="pq-extra">Aparte: publicación de los clips en tus cuentas y entregas urgentes.</p>
+    <p class="extra" data-i18n="pq-extra">Pagas semana a semana. Aparte: publicación de los clips en tus cuentas y entregas urgentes.</p>
     <div class="precios">
       <div>
-        <h3 data-i18n="pr-titulo">Consulta precios aquí</h3>
-        <p data-i18n="pr-texto">Te paso la cotización según tu país y cuánto publicas.</p>
+        <h3 data-i18n="pr-titulo">¿Aún no te decides?</h3>
+        <p data-i18n="pr-texto">Pide tus 3 clips gratis o escríbeme y armamos un paquete a tu medida.</p>
       </div>
       <div class="precios-contacto">
         <a class="btn btn-wa wa-precio" href="https://wa.me/59175027789" target="_blank" rel="noopener">
@@ -524,16 +536,18 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
       "h-paquetes": 'Weekly <span class="hl">packages</span>',
       "sub-paquetes": "Choose based on how much you post.",
       sello: "Recommended",
-      pq1: "Starter", "pq1-nota": "To get to know my work: up to 2 weeks.",
-      pq1a: "<b>7 clips</b> per week", pq1c: "Delivered in a single batch", pq1d: "1 round of revisions",
-      pq2: "Weekly", "pq2-nota": "The balance between volume and consistency.",
+      pq1: "Starter", "pq1-nota": "Try how your account grows with clips: up to 2 weeks.",
+      "pq-per": "USD / week", "pq-boton": "I want this package",
+      "pq1-clip": "Only <b>$9 per clip</b>",
+      pq1a: "<b>5 clips</b> per week", pq1b: "Captions, title and vertical format ready to post", pq1c: "Post caption for every clip", pq1e: "Delivered in a single batch", pq1d: "1 round of revisions",
+      pq2: "Weekly", "pq2-nota": "Twice the clips for just $20 more: more than 1 clip for every day.",
+      "pq2-clip": "<b>$6.50 per clip</b> · save 28%",
       pq2a: "<b>10 clips</b> per week", pq2b: "Everything in Starter, plus:", pq2c: "Captions in your brand colors", pq2d: "Delivered in 2 batches a week",
-      pq3: "Creator", "pq3-nota": "For creators who post every day.",
-      pq3a: "<b>15 clips</b> per week", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: colors and font", pq3d: "2 rounds of revisions",
-      pq4: "Streamer", "pq4-nota": "For streamers who go live several times a week.",
-      pq4a: "<b>25 clips</b> per week", pq4b: "Everything in Creator, plus:", pq4c: "Deliveries throughout the week",
-      "pq-extra": "Add-ons: posting the clips on your accounts and rush deliveries.",
-      "pr-titulo": "Ask for prices here", "pr-texto": "I'll send you a quote based on your country and how much you post.", "pr-correo": "Email",
+      pq3: "Creator", "pq3-nota": "For creators who want to grow fast and post every day.",
+      "pq3-clip": "<b>$6.33 per clip</b> · the lowest price",
+      pq3a: "<b>15 clips</b> per week: 2 a day", pq3b: "Everything in Weekly, plus:", pq3c: "Your own style: colors and font", pq3d: "2 rounds of revisions",
+      "pq-extra": "Pay week by week. Add-ons: posting the clips on your accounts and rush deliveries.",
+      "pr-titulo": "Still deciding?", "pr-texto": "Ask for your 3 free clips or message me and we'll build a package that fits you.", "pr-correo": "Email",
       "h-sobre": 'About <span class="hl">me</span>',
       sobre1: "I'm Ariel, a vertical clip editor based in Bolivia. You work directly with me, no middlemen: the person who edits your videos is the one who answers you.",
       sobre2: "Working from Bolivia lets me charge less than most editors without lowering the quality: I'd rather you judge me by the results.",
@@ -591,14 +605,21 @@ h2 .gratis { padding: 0 0.18em; border-radius: 0.12em; }
     en: "Hi Ariel, I saw your page and I'd like my 3 free sample clips."
   };
   var MENSAJE_PRECIO = {
-    es: "Hola Ariel, vi tu página y quiero consultar los precios de los paquetes.",
-    en: "Hi Ariel, I saw your page and I'd like to ask about your package prices."
+    es: "Hola Ariel, vi tu página y quiero consultar por un paquete a mi medida.",
+    en: "Hi Ariel, I saw your page and I'd like to ask about a custom package."
   };
   function actualizarWhatsApp(lang) {
     var url = "https://wa.me/59175027789?text=" + encodeURIComponent(MENSAJE_WA[lang] || MENSAJE_WA.es);
     document.querySelectorAll("a.wa").forEach(function (a) { a.href = url; });
     document.querySelectorAll("a.wa-precio").forEach(function (a) {
       a.href = "https://wa.me/59175027789?text=" + encodeURIComponent(MENSAJE_PRECIO[lang] || MENSAJE_PRECIO.es);
+    });
+    // cada paquete abre el chat diciendo cual quiere
+    document.querySelectorAll("a.wa-paquete").forEach(function (a) {
+      var nombre = a.closest(".paquete").querySelector("h3").textContent;
+      var txt = lang === "en" ? "Hi Ariel, I saw your page and I want the " + nombre + " package."
+                              : "Hola Ariel, vi tu página y quiero el paquete " + nombre + ".";
+      a.href = "https://wa.me/59175027789?text=" + encodeURIComponent(txt);
     });
   }
 
