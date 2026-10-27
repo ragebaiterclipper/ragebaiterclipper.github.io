@@ -322,6 +322,8 @@ section { padding-block: clamp(48px, 7vw, 76px); border-top-color: color-mix(in 
 .clip figcaption { margin-top: 16px; }
 .clip figcaption span { display: inline-flex; align-self: start; justify-self: start; margin-top: 4px; font-size: 0.78rem; font-weight: 700;
   padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+.clip figcaption .encargo { margin-top: 6px; font-size: 0.76rem; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.clip figcaption .encargo::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 6px #3ddc84; }
 
 /* Que lleva cada clip: tarjetas con icono */
 .incluye { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
@@ -445,7 +447,7 @@ section { padding-block: clamp(48px, 7vw, 76px); border-top-color: color-mix(in 
     <div class="clips">
       <figure class="clip">
         <div class="tel"><video data-luz="230 230 230" src="clips/clip11.mp4" poster="clips/clip11.jpg" controls muted loop playsinline preload="none"></video></div>
-        <figcaption><b>Así nació Venezuela Rial Nasti</b><span data-i18n="cat-beat">Productor / beats · 0:59</span></figcaption>
+        <figcaption><b>Así nació Venezuela Rial Nasti</b><span data-i18n="cat-beat">Productor / beats · 0:59</span><small class="encargo" data-i18n="encargo">Encargo real · AG SixTeen</small></figcaption>
       </figure>
       <figure class="clip">
         <div class="tel"><video data-luz="70 230 140" src="clips/clip6.mp4" poster="clips/clip6.jpg" controls muted loop playsinline preload="none"></video></div>
@@ -456,7 +458,7 @@ section { padding-block: clamp(48px, 7vw, 76px); border-top-color: color-mix(in 
         <figcaption><b>Lo que le vamos a regalar al público</b><span data-i18n="cat-vlog">Vlog / música · 0:42</span></figcaption>
       </figure>
     </div>
-    <p class="aviso" data-i18n="aviso">Ejemplos hechos con contenido público de The Wild Project (con Luisito Comunica), Carrero, Mateu Hernández, Cero y YSY A, en YouTube, para mostrar el estilo de edición. No son clientes ni trabajos encargados.</p>
+    <p class="aviso" data-i18n="aviso">Ejemplos hechos con contenido público de The Wild Project (con Luisito Comunica), Carrero, Mateu Hernández, Cero y YSY A, en YouTube, para mostrar el estilo de edición. Salvo el de AG SixTeen, no son clientes ni trabajos encargados.</p>
   </section>
 
   <section aria-labelledby="t-antes" class="revelar azul">
@@ -650,8 +652,8 @@ section { padding-block: clamp(48px, 7vw, 76px); border-top-color: color-mix(in 
       "o-correo": "or by email:", copiar: "Copy", copiado: "Copied!",
       "h-ejemplos": 'Examples of <span class="hl">my editing</span>',
       "sub-ejemplos": "Full clips, ready to post. Turn the sound on to watch them like on a phone.",
-      "cat-beat": "Producer / beats · 0:59", "cat-reto": "Adventure / challenge · 1:02", "cat-vlog": "Vlog / music · 0:42",
-      aviso: "Examples made from public YouTube content by The Wild Project (with Luisito Comunica), Carrero, Mateu Hernández, Cero and YSY A to show my editing style. They are not clients or commissioned jobs.",
+      "cat-beat": "Producer / beats · 0:59", "encargo": "Real client order · AG SixTeen", "cat-reto": "Adventure / challenge · 1:02", "cat-vlog": "Vlog / music · 0:42",
+      aviso: "Examples made from public YouTube content by The Wild Project (with Luisito Comunica), Carrero, Mateu Hernández, Cero and YSY A to show my editing style. Except for AG SixTeen, they are not clients or commissioned jobs.",
       "h-antes": 'Before and <span class="hl">after</span>',
       "sub-antes": "The same moment: the original video as it was recorded and the clip I deliver. Drag the bar to compare.",
       antes: "Before", despues: "After",
